@@ -1,0 +1,146 @@
+:root {
+  --bg: #030509;
+  --grid: rgba(0,255,242,0.05);
+  --accent: #00fff2;
+  --text: #e5e7eb;
+  --panel: #0b0e13cc;
+  --shadow: 0 0 20px rgba(0,255,242,0.25);
+  --radius: 16px;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Share Tech Mono", monospace;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* fondo con cuadrícula animada */
+#grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveGrid 20s linear infinite;
+}
+@keyframes moveGrid {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 40px 40px, 40px 40px; }
+}
+
+/* Ventanas flotantes */
+.window {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid rgba(0,255,242,0.2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.window:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(0,255,242,0.5);
+}
+
+.window-header {
+  padding: 0.8rem;
+  border-bottom: 1px solid rgba(0,255,242,0.2);
+  color: var(--accent);
+  font-weight: bold;
+  text-shadow: 0 0 8px var(--accent);
+}
+
+.window-body {
+  padding: 1.2rem;
+  text-align: center;
+}
+
+button {
+  margin-top: 1rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #000;
+  box-shadow: 0 0 8px var(--accent);
+  transition: all 0.3s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+.status {
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+}
+.status.active {
+  color: var(--accent);
+}
+.status.inactive {
+  color: #ff4444;
+}
+.status.error {
+  color: #ffcc00;
+}
+
+/* ==========================
+   SISTEMA DASHBOARD FUTURISTA
+========================== */
+.system-container {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 0 15px #00fff220;
+  animation: fadeIn 0.8s ease-in-out;
+}
+.sys-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.sys-card {
+  flex: 1;
+  min-width: 150px;
+  background: rgba(20, 30, 40, 0.4);
+  border: 1px solid #2dd4bf33;
+  border-radius: 14px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 0 8px #00fff222;
+  transition: all 0.3s ease;
+}
+.sys-card:hover {
+  box-shadow: 0 0 15px var(--neon);
+  transform: translateY(-3px);
+}
+.sys-card h3 {
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+.sys-card p {
+  font-size: 1.3rem;
+  color: var(--fg);
+}
+.sys-extra {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  color: var(--fg);
+  font-size: 1rem;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

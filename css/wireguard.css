@@ -1,0 +1,66 @@
+.wg-container {
+  background: rgba(15, 25, 35, 0.6);
+  border: 1px solid #0ff4c6;
+  border-radius: 16px;
+  box-shadow: 0 0 20px #00fff2aa;
+  padding: 25px;
+  width: 420px;
+  margin: 40px auto;
+  font-family: 'Share Tech Mono', monospace;
+  color: #e5e7eb;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.wg-title {
+  color: #00fff2;
+  text-shadow: 0 0 12px #00fff2;
+  margin-top: 0;
+}
+
+.wg-sub {
+  margin-top: -5px;
+  color: #9ca3af;
+  font-size: 0.9em;
+}
+
+.wg-status .label {
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.status-text {
+  font-weight: bold;
+  color: #00ffbf;
+}
+
+.wg-peers h3 {
+  color: #14b8a6;
+  border-bottom: 1px solid #14b8a644;
+  padding-bottom: 4px;
+  margin-top: 20px;
+}
+
+.peer-list div {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid #0ff4c6;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.peer-list div:hover {
+  transform: scale(1.02);
+  background: rgba(0, 255, 242, 0.08);
+}
+
+.wg-btn {
+  background: linear-gradient(90deg, #00fff2, #14b8a6);
+  color: #0b0d12;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  margin-top: 22px;
+  cu

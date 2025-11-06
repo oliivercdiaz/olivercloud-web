@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Oliver Cloud Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070d; --fg:#e5e7eb; --panel:#0d1018;
+  --line:#2dd4bf33; --neon:#00fff2; --accent:#14b8a6;
+  --nav-height:64px;
+}
+*{box-sizing:border-box;font-family:'Share Tech Mono', monospace}
+body{
+  margin:0;background:radial-gradient(circle at top left,#05070d,#020409);
+  color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* === NAV === */
+header{
+  position:fixed;left:50%;top:14px;transform:translateX(-50%);
+  width:92%;max-width:1200px;padding:10px 22px;border-radius:14px;
+  background:rgba(8,12,16,0.45);backdrop-filter:blur(8px);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  z-index:60;box-shadow:0 0 30px #00fff233;height:var(--nav-height);
+}
+.brand{color:var(--neon);font-size:1.05rem;text-shadow:0 0 8px var(--neon);user-select:none}
+nav.desktop{display:flex;gap:14px;align-items:center}
+.nav-link{
+  color:var(--fg); text-decoration:none; padding:8px 12px; border-radius:999px;
+  transition:transform .14s,color .14s; white-space:nowrap;
+}
+.nav-link:hover{ color:var(--neon); transform:scale(0.95); }
+.nav-link.active{
+  color:#001214;transform:scale(0.92);
+  box-shadow:0 6px 30px #00fff233, inset 0 -2px 12px #00fff233;
+  background:linear-gradient(90deg,rgba(0,255,242,0.95),rgba(20,184,166,0.9));
+  padding:6px 14px;border-radius:999px;
+}
+
+/* === LAYOUT GENERAL === */
+main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:center;padding-bottom:80px}
+.container{width:92%;max-width:1200px;padding:6px}
+.panel{background:var(--panel);border-radius:14px;padding:22px;border:1px solid var(--line);box-shadow:0 0 30px #00fff233;margin:22px 0}
+.hero{
+  background:linear-gradient(180deg,rgba(0,0,0,0.22),transparent);
+  padding:28px;border-radius:14px;border:1px solid var(--line);
+  box-shadow:0 0 40px #00fff233;
+}
+.hero h1{color:var(--neon);text-shadow:0 0 12px var(--neon);margin:0 0 6px;font-size:1.6rem}
+.hero p{color:#bfc7c9;margin-top:8px}
+
+/* === CARDS / GRID === */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{
+  background:rgba(12,16,20,0.85);padding:18px;border-radius:10px;
+  border:1px solid rgba(45,212,191,0.06);color:#cfe7e5;position:relative;
+}
+.card .title{color:var(--neon);font-size:1.05rem;text-shadow:0 0 6px var(--neon);margin-bottom:8px}
+.card .value{font-size:0.95rem;color:#d7e9e7}
+.bar{height:10px;background:rgba(255,255,255,0.07);border-radius:8px;overflow:hidden;margin:10px 0}
+.fill{height:100%;background:linear-gradient(90deg,var(--neon),var(--accent));width:0;transition:width .8s}
+
+/* === INPUTS / BUTTONS === */
+input, select{
+  background:rgba(12,16,20,0.92);border:1px solid var(--line);
+  border-radius:8px;padding:8px 10px;color:var(--fg);
+  font-size:0.95rem;outline:none;width:100%;
+}
+button{
+  background:linear-gradient(90deg,var(--neon),var(--accent));
+  border:none;border-radius:8px;padding:9px 14px;color:#001214;
+  font-weight:bold;cursor:pointer;font-size:0.95rem;
+  box-shadow:0 0 12px #00fff233;transition:transform .12s;
+}
+button:hover{transform:scale(0.97);}
+
+/* === Tooltip Docker === */
+.tooltip{display:none;position:absolute;left:50%;transform:translateX(-50%);bottom:110%;
+  background:rgba(0,0,0,0.7);color:var(--neon);padding:10px;border-radius:10px;
+  text-align:left;font-size:0.9rem;white-space:pre-line;box-shadow:0 0 20px #00fff233;z-index:55;max-width:320px}
+#docker-card:hover .tooltip{display:block}
+
+/* === Reto === */
+#reto-form .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+#reto-acciones{display:flex;gap:10px;flex-wrap:wrap}
+#hucha{color:var(--neon);text-shadow:0 0 8px var(--neon);border:1px solid var(--line);
+  padding:10px 12px;border-radius:10px;background:rgba(12,16,20,0.88);display:inline-block;margin-top:10px}
+.history{margin-top:12px;color:#9fb1b0;font-size:0.9rem;border-top:1px solid var(--line);padding-top:8px}
+details summary{cursor:pointer;color:var(--accent);user-select:none}
+details[open] summary{color:var(--neon)}
+
+/* === Responsive === */
+@media(max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} #reto-form .row{grid-template-columns:1fr} }
+@media(max-width:520px){ .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">OLIVER CLOUD SYSTEMS</div>
+  <nav class="desktop">
+    <a href="#" class="nav-link active" data-section="home">Inicio</a>
+    <a href="#" class="nav-link" data-section="wireguard">WireGuard</a>
+    <a href="#" class="nav-link" data-section="reto">Reto</a>
+    <a href="#" class="nav-link" data-section="system">Sistema</a>
+  </nav>
+</header>
+
+<main>
+  <div class="container">
+    <!-- HOME -->
+    <section id="section-home" class="panel hero">
+      <h1>Bienvenido, Oliver</h1>
+      <p>Panel principal — cada pestaña carga bajo demanda. No hay refresco automático salvo al volver de otra pestaña.</p>
+    </section>
+
+    <!-- WIREGUARD -->
+    <section id="section-wireguard" class="panel" style="display:none">
+      <h2>WireGuard Monitor</h2>
+      <div id="wg-container">
+        <div class="card">
+          <div class="title" id="wg-state">Estado: —</div>
+          <div class="value" id="wg-summary">Pulsa la pestaña para cargar.</div>
+        </div>
+        <div id="wg-peers" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+    <!-- RETO -->
+    <section id="section-reto" class="panel" style="display:none">
+      <h2>Reto de Apuestas</h2>
+      <div id="reto-form" class="card">
+        <div class="row">
+          <div><label>💰 Banca inicial (€)</label><input id="r-saldo" type="number" min="0" step="0.01" placeholder="10"></div>
+          <div><label>🎯 Objetivo (€)</label><input id="r-objetivo" type="number" min="0" step="0.01" placeholder="10000"></div>
+          <div><label>📈 Cuota fija</label><input id="r-cuota" type="number" min="1.01" step="0.01" placeholder="1.10"></div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+          <button id="r-calcular">Calcular plan</button>
+          <button id="r-reiniciar" style="background:linear-gradient(90deg,#ff6b6b,#ef4444)">Reiniciar todo</button>
+        </div>
+      </div>
+
+      <div id="reto-estado" class="card" style="display:none">
+        <div class="title">➡️ Próximo paso</div>
+        <div id="r-proximo" class="value">—</div>
+        <div style="margin:12px 0;border-top:1px solid var(--line)"></div>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <input id="r-deporte" placeholder="🌐 Deporte">
+          <input id="r-evento" placeholder="⌗ Evento/Partido">
+          <input id="r-pronostico" placeholder="🎯 Pronóstico">
+          <input id="r-cuota-real" placeholder="💵 Cuota real (opcional)" type="number" step="0.01" min="1.01">
+        </div>
+
+        <div id="reto-acciones" style="margin-top:12px">
+          <button id="r-win">✅ Win</button>
+          <button id="r-lose" style="background:linear-gradient(90deg,#ff6b6b,#ef4444)">❌ Lose</button>
+          <button id="r-toggle" style="background:linear-gradient(90deg,#06b6d4,#22d3ee)">👁️ Ver/Ocultar todos</button>
+        </div>
+
+        <div id="hucha">💎 Hucha: 0.00 €</div>
+
+        <details id="r-hist-det" class="history" style="margin-top:10px">
+          <summary>📘 Ver historial</summary>
+          <div id="r-historial" style="margin-top:8px"></div>
+        </details>
+
+        <div style="display:flex;gap:14px;margin-top:10px;color:#9fb1b0">
+          <div>👜 Banca inicial: <span id="r-banca-inicial">0.00€</span></div>
+          <div>🎯 Objetivo: <span id="r-objetivo-lbl">0.00€</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SISTEMA -->
+    <section id="section-system" class="panel" style="display:none">
+      <h2>Sistema</h2>
+      <div class="grid">
+        <div class="card"><div class="title">Hostname</div><div id="s-hostname" class="value">N/A</div></div>
+        <div class="card"><div class="title">OS</div><div id="s-os" class="value">N/A</div></div>
+        <div class="card"><div class="title">Uptime</div><div id="s-uptime" class="value">N/A</div></div>
+        <div class="card"><div class="title">CPU</div><div class="bar"><div id="s-cpu-fill" class="fill"></div></div><div id="s-cpu" class="value">N/A</div></div>
+        <div class="card"><div class="title">RAM</div><div class="bar"><div id="s-ram-fill" class="fill"></div></div><div id="s-ram" class="value">N/A</div></div>
+        <div class="card"><div class="title">Disco</div><div id="s-disk" class="value">N/A</div></div>
+        <div class="card"><div class="title">Temp</div><div id="s-temp" class="value">N/A</div></div>
+        <div class="card" id="docker-card"><div class="title">Docker</div><div id="s-docker" class="value">N/A</div><div class="tooltip" id="s-docker-tip">Contenedores activos:\nNinguno</div></div>
+        <div class="card"><div class="title">IP Pública</div><div id="s-ip" class="value">N/A</div></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+/* ====== Navegación ====== */
+let currentSection='home';
+const sections={
+  home:document.getElementById('section-home'),
+  wireguard:document.getElementById('section-wireguard'),
+  reto:document.getElementById('section-reto'),
+  system:document.getElementById('section-system')
+};
+document.querySelectorAll('.nav-link').forEach(a=>{
+  a.addEventListener('click',ev=>{
+    ev.preventDefault();
+    document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+    Object.values(sections).forEach(s=>s.style.display='none');
+    sections[a.dataset.section].style.display='';
+    currentSection=a.dataset.section;
+    if(currentSection==='wireguard') loadWG();
+    if(currentSection==='system') loadSystem();
+  });
+});
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'){
+    if(currentSection==='wireguard') loadWG();
+    if(currentSection==='system') loadSystem();
+  }
+});
+
+/* ====== WireGuard ====== */
+async function loadWG(){
+  const s=document.getElementById('wg-state');
+  const sm=document.getElementById('wg-summary');
+  const peersBox=document.getElementById('wg-peers');
+  s.textContent='Estado: comprobando...';
+  sm.textContent='Cargando...';
+  peersBox.innerHTML='';
+  try{
+    const res=await fetch('https://api.olivercloud.es/api/wg/status',{cache:'no-store'});
+    const d=await res.json();
+    if(!d || d.status!=='ok' || !d.running){
+      s.textContent='🔴 Inactivo';
+      sm.textContent=d?.message||'WireGuard no disponible';
+      return;
+    }
+    s.innerHTML='<span style="color:#22c55e">🟢 Activo</span>';
+    sm.innerHTML=`Peers: ${d.peers_active||0}/${d.peers_total||0}<br>Último handshake: ${d.last_handshake||'N/A'}<br>RX/TX: ${d.rx||'0 B'} / ${d.tx||'0 B'}`;
+    if(Array.isArray(d.peers) && d.peers.length){
+      d.peers.forEach(p=>{
+        const box=document.createElement('div');
+        box.className='card';
+        box.style.marginTop='10px';
+        box.innerHTML=`<div style="text-align:left">
+          <strong>${p.name||'peer'}</strong><br>
+          <span class="value" style="color:#9fb1b0">IP: ${p.ip||'N/A'} — Endpoint: ${p.endpoint||'N/A'}<br>
+          Handshake: ${p.last_handshake||'N/A'} — RX/TX: ${p.rx||'0 B'} / ${p.tx||'0 B'}</span>
+        </div>`;
+        peersBox.appendChild(box);
+      });
+    }else{
+      peersBox.innerHTML='<div class="card"><div class="value">No hay peers.</div></div>';
+    }
+  }catch(e){
+    s.textContent='⚠️ Error'; sm.textContent='No se pudo conectar con la API';
+  }
+}
+
+/* ====== Sistema ====== */
+async function loadSystem(){
+  const E=(id)=>document.getElementById(id);
+  const set=(id,v)=>E(id).textContent=v;
+  try{
+    const res=await fetch('https://api.olivercloud.es/api/system/status',{cache:'no-store'});
+    const d=await res.json();
+    if(!d || d.status!=='ok') throw new Error('API');
+
+    set('s-hostname', d.hostname || 'N/A');
+    set('s-os', d.os || d.kernel || 'N/A');
+    set('s-uptime', d.uptime || 'N/A');
+
+    const cpuNum = typeof d.cpu_usage==='number' ? d.cpu_usage : parseFloat(d.cpu_usage)||0;
+    set('s-cpu', (cpuNum.toFixed?cpuNum.toFixed(1):cpuNum)+'%');
+    E('s-cpu-fill').style.width = Math.max(0,Math.min(100,cpuNum))+'%';
+
+    const used = parseInt((d.ram_used||'').replace(/[^0-9]/g,''))||0;
+    const total = parseInt((d.ram_total||'').replace(/[^0-9]/g,''))||0;
+    const ramPct = total ? Math.round(used/total*100) : 0;
+    set('s-ram', `${d.ram_used||'0MB'} / ${d.ram_total||'N/A'}${total?` (${ramPct}%)`:''}`);
+    E('s-ram-fill').style.width = ramPct+'%';
+
+    set('s-disk', d.disk || 'N/A');
+    set('s-temp', d.temperature || 'N/A');
+    set('s-ip', d.ip_public || 'N/A');
+
+    const docker = d.docker || `${d.docker_running||0}/${d.docker_total||0}` || '0/0';
+    set('s-docker', docker);
+    const names = Array.isArray(d.docker_names)? d.docker_names : [];
+    E('s-docker-tip').textContent = names.length
+      ? 'Contenedores activos:\n' + names.map(n=>'• '+n).join('\n')
+      : 'Contenedores activos:\nNinguno';
+  }catch(e){
+    set('s-hostname','Error'); set('s-os','Error'); set('s-uptime','Error');
+    set('s-cpu','N/A'); set('s-ram','N/A'); set('s-disk','N/A'); set('s-temp','N/A'); set('s-docker','N/A'); set('s-ip','N/A');
+    E('s-docker-tip').textContent='No se pudo obtener info';
+  }
+}
+
+/* ====== RETO ====== */
+let R={banca:0,objetivo:0,cuota:0,paso:0,historial:[],hucha:0,ocultar:true};
+const Rels={
+  saldo:document.getElementById('r-saldo'),obj:document.getElementById('r-objetivo'),cuota:document.getElementById('r-cuota'),
+  calc:document.getElementById('r-calcular'),rein:document.getElementById('r-reiniciar'),
+  boxEstado:document.getElementById('reto-estado'),proximo:document.getElementById('r-proximo'),
+  bancaIni:document.getElementById('r-banca-inicial'),objetivoLbl:document.getElementById('r-objetivo-lbl'),
+  deporte:document.getElementById('r-deporte'),evento:document.getElementById('r-evento'),pron:document.getElementById('r-pronostico'),
+  cuotaReal:document.getElementById('r-cuota-real'),win:document.getElementById('r-win'),lose:document.getElementById('r-lose'),
+  toggle:document.getElementById('r-toggle'),histDet:document.getElementById('r-hist-det'),
+  hist:document.getElementById('r-historial'),hucha:document.getElementById('hucha')
+};
+function rSave(){ localStorage.setItem('reto', JSON.stringify(R)); }
+function rLoad(){
+  try{
+    const d=JSON.parse(localStorage.getItem('reto')||'{}');
+    Object.assign(R,{...R,...d});
+    if(R.banca>0 && R.objetivo>0 && R.cuota>1) rRenderAll();
+  }catch{}
+}
+function rReset(hard=false){
+  R={banca:0,objetivo:0,cuota:0,paso:0,historial:[],hucha: hard?0:R.hucha, ocultar:true};
+  Rels.saldo.value=''; Rels.obj.value=''; Rels.cuota.value='';
+  Rels.boxEstado.style.display='none';
+  Rels.hist.innerHTML=''; Rels.histDet.open=false;
+  rUpdateHucha(); rSave();
+}
+function rUpdateHucha(){ Rels.hucha.textContent=`💎 Hucha: ${R.hucha.toFixed(2)} €`; }
+function rPlan(){
+  const banca=parseFloat(Rels.saldo.value)||0;
+  const objetivo=parseFloat(Rels.obj.value)||0;
+  const cuota=parseFloat(Rels.cuota.value)||0;
+  if(banca<=0||objetivo<=0||cuota<=1) return alert('Datos inválidos');
+  R.banca=banca; R.objetivo=objetivo; R.cuota=cuota; R.paso=1; R.historial=[];
+  rRenderAll(); rSave();
+}
+function rProximoTexto(){
+  const apuesta = R.banca.toFixed(2);
+  const post = (R.banca*R.cuota).toFixed(2);
+  return `Apuesta: <b>${apuesta}€</b> @ cuota fija <b>${R.cuota}</b><br>Banca tras paso: <b>${post}€</b> (Paso ${R.paso}/${Math.max(1,Math.ceil(Math.log(R.objetivo/R.banca)/Math.log(R.cuota)))})`;
+}
+function rRenderAll(){
+  Rels.boxEstado.style.display='';
+  Rels.proximo.innerHTML=rProximoTexto();
+  Rels.bancaIni.textContent=`${(R.banca).toFixed(2)}€`;
+  Rels.objetivoLbl.textContent=`${R.objetivo.toFixed(2)}€`;
+  rRenderHist(); rUpdateHucha();
+}
+function rRenderHist(){
+  if(!R.historial.length){ Rels.hist.textContent='Sin historial.'; return; }
+  const rows = R.historial.map(h=>{
+    return `<details ${R.ocultar?'':'open'} class="history">
+      <summary>${h.head}</summary><div style="margin-top:6px">${h.body}</div>
+    </details>`;
+  });
+  Rels.hist.innerHTML=rows.join('');
+}
+function rWin(){
+  const cuotaReal = parseFloat(Rels.cuotaReal.value)||R.cuota;
+  const post = R.banca * cuotaReal;
+  const ganancia = post - R.banca;
+  const aHucha = Math.max(0, ganancia*0.05);
+  R.hucha += aHucha;
+  R.banca = post;
+  R.historial.push({
+    head:`✅ Win paso ${R.paso} — +${ganancia.toFixed(2)}€ (cuota ${cuotaReal})`,
+    body:`🧾 ${R.deporte||Rels.deporte.value||'-'} — ${R.evento||Rels.evento.value||'-'} — ${R.pron||Rels.pron.value||'-'}<br>Apuesta ${(post/cuotaReal).toFixed(2)}€ → Banca: ${post.toFixed(2)}€ — Hucha +${aHucha.toFixed(2)}€`
+  });
+  R.paso++; Rels.deporte.value=''; Rels.evento.value=''; Rels.pron.value=''; Rels.cuotaReal.value='';
+  rRenderAll(); rSave();
+}
+function rLose(){
+  R.historial.push({head:`❌ Lose en paso ${R.paso}`,body:`Se reinicia el reto.`});
+  alert('Reto perdido. Reiniciando (se mantiene hucha).');
+  rReset(false); rSave();
+}
+function rToggle(){ R.ocultar=!R.ocultar; rRenderHist(); }
+Rels.calc.onclick=rPlan;
+Rels.rein.onclick=()=>{ if(confirm('¿Reiniciar TODO el reto? (se mantiene la hucha)')) rReset(false); };
+Rels.win.onclick=rWin;
+Rels.lose.onclick=rLose;
+Rels.toggle.onclick=rToggle;
+rLoad();
+</script>
+</body>
+</html>

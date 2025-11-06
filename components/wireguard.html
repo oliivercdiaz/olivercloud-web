@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>WireGuard Panel</title>
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at top left, #05070d, #020409);
+  color: #e5e7eb;
+  font-family: 'Share Tech Mono', monospace;
+  padding: 40px;
+}
+.panel {
+  background: rgba(15,25,35,0.6);
+  border: 1px solid #00fff244;
+  border-radius: 20px;
+  padding: 25px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 0 30px #00fff244;
+  text-align: center;
+}
+h1 {
+  color: #00fff2;
+  text-shadow: 0 0 10px #00fff2;
+}
+button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #00fff2, #14b8a6);
+  color: #021010;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+  <div class="panel">
+    <h1>🔒 WireGuard</h1>
+    <p>Estado: <span id="wg-status">Comprobando...</span></p>
+    <div id="peers"></div>
+    <button onclick="updateWG()">Refrescar</button>
+  </div>
+
+<script src="/js/wireguard.js"></script>
+</body>
+</html>

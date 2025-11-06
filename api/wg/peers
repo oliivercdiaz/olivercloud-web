@@ -1,0 +1,4 @@
+[
+  {"name": "OliverLaptop", "public_key": "ABC123...", "active": true, "last_handshake": "Hace 5 min"},
+  {"name": "Phone", "public_key": "XYZ456...", "active": false}
+]
