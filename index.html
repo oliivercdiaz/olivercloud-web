@@ -141,14 +141,9 @@ input, select{
   font-size:0.95rem;outline:none;width:100%;
 }
 
-.sport-picker{position:relative;display:flex;flex-direction:column;gap:6px}
+.sport-picker{position:relative;display:flex;flex-direction:column}
 .sport-picker select{appearance:none;padding-right:34px;background-image:linear-gradient(90deg,rgba(0,255,242,0.12),rgba(20,184,166,0.08));cursor:pointer;}
 .sport-picker::after{content:'⌄';position:absolute;right:12px;top:12px;color:var(--accent);pointer-events:none;font-size:0.9rem}
-.sport-preview{
-  font-size:0.85rem;color:#9fb1b0;padding:6px 10px;border-radius:8px;border:1px dashed rgba(45,212,191,0.3);
-  background:rgba(12,16,20,0.6);min-height:32px;display:flex;align-items:center;
-}
-
 .reto-progress{margin-top:14px;display:flex;flex-direction:column;gap:6px}
 .reto-progress-text{display:flex;justify-content:space-between;font-size:0.85rem;color:#9fb1b0}
 .reto-progress-bar{height:8px;border-radius:999px;background:rgba(255,255,255,0.08);overflow:hidden}
@@ -175,11 +170,6 @@ details summary{cursor:pointer;color:var(--accent);user-select:none}
 details[open] summary{color:var(--neon)}
 
 /* === Docker === */
-.docker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
-.docker-card{background:rgba(12,16,20,0.92);border-radius:12px;padding:16px;border:1px solid rgba(45,212,191,0.12);box-shadow:0 12px 24px rgba(0,0,0,0.35);}
-.docker-card h3{margin:0 0 6px;font-size:1rem;color:var(--neon);}
-.docker-card .docker-meta{color:#9fb1b0;font-size:0.85rem;line-height:1.5}
-.docker-empty{color:#9fb1b0;text-align:center;padding:20px;border:1px dashed rgba(45,212,191,0.25);border-radius:12px;margin-top:16px}
 
 /* === Responsive === */
 @media(max-width:1024px){
@@ -220,7 +210,6 @@ details[open] summary{color:var(--neon)}
   .hero{padding:26px}
   .clock-time{font-size:2.1rem}
   .quick-stack{grid-template-columns:1fr}
-  .docker-grid{grid-template-columns:1fr}
 }
 @media(max-width:520px){
   header{left:50%;transform:translateX(-50%);border-radius:12px}
@@ -241,7 +230,7 @@ details[open] summary{color:var(--neon)}
   <nav id="main-nav" class="desktop">
     <a href="#" class="nav-link active" data-section="home">Inicio</a>
     <a href="#" class="nav-link" data-section="wireguard">WireGuard</a>
-    <a href="#" class="nav-link" data-section="docker">Docker</a>
+    <a href="#" class="nav-link" data-section="docker">Próximo proyecto</a>
     <a href="#" class="nav-link" data-section="reto">Reto</a>
     <a href="#" class="nav-link" data-section="system">Sistema</a>
   </nav>
@@ -263,7 +252,7 @@ details[open] summary{color:var(--neon)}
             <p id="hero-tagline">Panel principal en espera de instrucciones.</p>
             <div class="hero-actions">
               <a href="#" class="hero-btn" data-jump-section="wireguard">⚡ Monitor WireGuard</a>
-              <a href="#" class="hero-btn" data-jump-section="docker">🐳 Panel Docker</a>
+              <a href="#" class="hero-btn" data-jump-section="docker">🚧 Próximo proyecto</a>
               <a href="#" class="hero-btn" data-jump-section="reto">🎯 Abrir reto</a>
               <a href="#" class="hero-btn ghost" data-jump-section="system">🛠️ Estado del sistema</a>
             </div>
@@ -282,9 +271,9 @@ details[open] summary{color:var(--neon)}
               <div class="quick-card-note" id="hero-wg-note">Toca el monitor para consultar la API.</div>
             </div>
             <div class="quick-card">
-              <div class="quick-card-label">Docker</div>
-              <div class="quick-card-value" id="hero-docker-status">Panel preparado</div>
-              <div class="quick-card-note" id="hero-docker-note">Abre la pestaña “Docker” para listar contenedores.</div>
+              <div class="quick-card-label">Próximo proyecto</div>
+              <div class="quick-card-value" id="hero-docker-status">Espacio reservado</div>
+              <div class="quick-card-note" id="hero-docker-note">Personaliza esta pestaña cuando definas el módulo.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Sistema</div>
@@ -313,19 +302,14 @@ details[open] summary{color:var(--neon)}
       </div>
     </section>
 
-    <!-- DOCKER -->
+    <!-- PROXIMO PROYECTO -->
     <section id="section-docker" class="panel" style="display:none">
-      <h2>Panel Docker</h2>
-      <div class="card" id="docker-summary">
-        <div class="title">Estado general</div>
-        <div class="value" id="docker-status">Pulsa “Actualizar Docker” para sincronizar.</div>
-        <div class="quick-card-note" id="docker-meta">No hay datos cargados.</div>
-        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-          <button id="docker-refresh">Actualizar Docker</button>
-          <button id="docker-clear" style="background:linear-gradient(90deg,#6366f1,#8b5cf6)">Limpiar vista</button>
-        </div>
+      <h2>Próximo proyecto</h2>
+      <div class="card">
+        <div class="title">🚧 En construcción</div>
+        <div class="value">Aquí irá el siguiente proyecto cuando definas la integración.</div>
+        <div class="quick-card-note">Prepara tus APIs con calma; este espacio ya está listo para adaptarse.</div>
       </div>
-      <div class="docker-grid" id="docker-cards"></div>
     </section>
 
     <!-- RETO -->
@@ -360,7 +344,6 @@ details[open] summary{color:var(--neon)}
               <option value="carreras" data-icon="🏁">🏁 Motor / Carreras</option>
               <option value="otros" data-icon="🌟">🌟 Otros</option>
             </select>
-            <div id="r-deporte-preview" class="sport-preview">🌐 Selecciona deporte</div>
           </div>
           <input id="r-evento" placeholder="⌗ Evento/Partido">
           <input id="r-pronostico" placeholder="🎯 Pronóstico">
@@ -448,7 +431,7 @@ const HERO_TAGLINES=[
 const HERO_HIGHLIGHTS=[
   'Tip: guarda tu plan del reto y volverá exactamente donde lo dejaste.',
   'Recuerda revisar los peers activos de WireGuard tras cada despliegue.',
-  'Consulta la pestaña Docker para ver puertos, estados y notas clave.',
+  'Reserva la pestaña “Próximo proyecto” para tu siguiente idea grande.',
   '¿Necesitas foco? Cierra el menú con el botón hamburguesa en móviles.'
 ];
 
@@ -603,84 +586,9 @@ async function loadWG(){
 }
 
 /* ====== Docker ====== */
-let DOCKER_LAST=[];
-function renderDockerCards(list,emptyMessage){
-  const box=document.getElementById('docker-cards');
-  if(!box) return;
-  if(!list.length){
-    box.innerHTML=`<div class="docker-empty">${emptyMessage||'Sin contenedores activos por ahora.'}</div>`;
-    return;
-  }
-  box.innerHTML='';
-  list.forEach(item=>{
-    const card=document.createElement('div');
-    card.className='docker-card';
-    card.innerHTML=`<h3>${item.icon} ${item.name}</h3>
-      <div class="docker-meta">
-        Estado: <strong>${item.state}</strong><br>
-        Imagen: ${item.image}<br>
-        Puertos: ${item.ports || '—'}
-      </div>`;
-    box.appendChild(card);
-  });
+function loadDocker(){
+  heroSetCard('docker','🚧 En construcción','Personaliza este módulo cuando esté listo.');
 }
-
-function dockerClear(){
-  const status=document.getElementById('docker-status');
-  const meta=document.getElementById('docker-meta');
-  DOCKER_LAST=[];
-  if(status) status.textContent='Panel en espera';
-  if(meta) meta.textContent='Pulsa “Actualizar Docker” para sincronizar.';
-  const box=document.getElementById('docker-cards');
-  if(box) box.innerHTML='<div class="docker-empty">Sin datos cargados. Actualiza para ver contenedores.</div>';
-  heroSetCard('docker','Panel preparado','Pulsa actualizar para sincronizar.');
-}
-
-async function loadDocker(){
-  const status=document.getElementById('docker-status');
-  const meta=document.getElementById('docker-meta');
-  heroSetCard('docker','Comprobando…','Consultando contenedores');
-  if(status) status.textContent='Sincronizando contenedores...';
-  if(meta) meta.textContent='Esperando respuesta del servidor.';
-  try{
-    const res=await fetch('https://api.olivercloud.es/api/system/status',{cache:'no-store'});
-    const d=await res.json();
-    if(!d || d.status!=='ok') throw new Error('API');
-    const running = typeof d.docker_running==='number'?d.docker_running:(Array.isArray(d.docker_names)?d.docker_names.length:0);
-    const total = typeof d.docker_total==='number'?d.docker_total:Math.max(running,Array.isArray(d.docker_names)?d.docker_names.length:0);
-    const names = Array.isArray(d.docker_names)?d.docker_names:[];
-    const states = Array.isArray(d.docker_states)?d.docker_states:[];
-    const images = Array.isArray(d.docker_images)?d.docker_images:[];
-    const ports = Array.isArray(d.docker_ports)?d.docker_ports:[];
-    DOCKER_LAST = names.map((name,idx)=>{
-      const rawState = states[idx] || 'Desconocido';
-      const normalized = rawState.toLowerCase();
-      return {
-        name:name||`contenedor-${idx+1}`,
-        state:rawState,
-        image:images[idx]||'N/A',
-        ports:ports[idx]||'',
-        icon:normalized.includes('up')||normalized.includes('running')?'🟢':'🟠'
-      };
-    });
-    renderDockerCards(DOCKER_LAST, 'Sin contenedores activos por ahora.');
-    if(status) status.textContent=`Activos ${running}/${total}`;
-    if(meta) meta.textContent=`Actualizado ${heroNowLabel()}`;
-    const cardStatus = total ? `🟢 ${running}/${total} activos` : (running>0?`🟢 ${running} activos`:'Sin contenedores');
-    heroSetCard('docker',cardStatus,`Actualizado ${heroNowLabel()}`);
-  }catch(e){
-    if(status) status.textContent='⚠️ Error al consultar Docker';
-    if(meta) meta.textContent='Revisa la API o vuelve a intentarlo.';
-    renderDockerCards([], 'No se pudo cargar la información.');
-    heroSetCard('docker','⚠️ Error','Revisa la API o vuelve a intentarlo.');
-  }
-}
-
-const dockerRefresh=document.getElementById('docker-refresh');
-const dockerClearBtn=document.getElementById('docker-clear');
-if(dockerRefresh) dockerRefresh.addEventListener('click',ev=>{ev.preventDefault();loadDocker();});
-if(dockerClearBtn) dockerClearBtn.addEventListener('click',ev=>{ev.preventDefault();dockerClear();});
-dockerClear();
 
 /* ====== Sistema ====== */
 async function loadSystem(){
@@ -750,7 +658,7 @@ const Rels={
   calc:document.getElementById('r-calcular'),rein:document.getElementById('r-reiniciar'),
   boxEstado:document.getElementById('reto-estado'),proximo:document.getElementById('r-proximo'),
   bancaIni:document.getElementById('r-banca-inicial'),objetivoLbl:document.getElementById('r-objetivo-lbl'),
-  deporte:document.getElementById('r-deporte'),deportePrev:document.getElementById('r-deporte-preview'),
+  deporte:document.getElementById('r-deporte'),
   evento:document.getElementById('r-evento'),pron:document.getElementById('r-pronostico'),
   cuotaReal:document.getElementById('r-cuota-real'),win:document.getElementById('r-win'),lose:document.getElementById('r-lose'),
   toggle:document.getElementById('r-toggle'),histDet:document.getElementById('r-hist-det'),
@@ -761,10 +669,6 @@ rUpdateToggleState(false);
 function rGetSportInfo(key){
   if(!key) return {icon:'🌐',label:'Selecciona deporte'};
   return SPORTS[key] || {icon:'🌐',label:'Personalizado'};
-}
-function rUpdateSportPreview(){
-  const {icon,label}=rGetSportInfo(Rels.deporte.value);
-  Rels.deportePrev.textContent=`${icon} ${label}`;
 }
 function rSave(){ localStorage.setItem('reto', JSON.stringify(R)); }
 function rLoad(){
@@ -795,7 +699,7 @@ function rReset(){
     ocultar:true
   };
   Rels.saldo.value=''; Rels.obj.value=''; Rels.cuota.value='';
-  Rels.deporte.value=''; rUpdateSportPreview();
+  Rels.deporte.value='';
   Rels.boxEstado.style.display='none';
   Rels.hist.innerHTML=''; Rels.histDet.open=false;
   Rels.progressFill.style.width='0%';
@@ -883,7 +787,6 @@ function rWin(){
   });
   R.paso = R.totalPasos>0 ? Math.min(R.totalPasos+1,(R.paso||1)+1) : (R.paso||1)+1;
   Rels.deporte.value=''; Rels.evento.value=''; Rels.pron.value=''; Rels.cuotaReal.value='';
-  rUpdateSportPreview();
   rRenderAll(); rSave();
 }
 function rLose(){
