@@ -85,8 +85,6 @@ button:hover{transform:scale(0.97);}
 /* === Reto === */
 #reto-form .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 #reto-acciones{display:flex;gap:10px;flex-wrap:wrap}
-#hucha{color:var(--neon);text-shadow:0 0 8px var(--neon);border:1px solid var(--line);
-  padding:10px 12px;border-radius:10px;background:rgba(12,16,20,0.88);display:inline-block;margin-top:10px}
 .history{margin-top:12px;color:#9fb1b0;font-size:0.9rem;border-top:1px solid var(--line);padding-top:8px}
 details summary{cursor:pointer;color:var(--accent);user-select:none}
 details[open] summary{color:var(--neon)}
@@ -159,8 +157,6 @@ details[open] summary{color:var(--neon)}
           <button id="r-lose" style="background:linear-gradient(90deg,#ff6b6b,#ef4444)">❌ Lose</button>
           <button id="r-toggle" style="background:linear-gradient(90deg,#06b6d4,#22d3ee)">👁️ Ver/Ocultar todos</button>
         </div>
-
-        <div id="hucha">💎 Hucha: 0.00 €</div>
 
         <details id="r-hist-det" class="history" style="margin-top:10px">
           <summary>📘 Ver historial</summary>
@@ -299,7 +295,16 @@ async function loadSystem(){
 }
 
 /* ====== RETO ====== */
-let R={banca:0,objetivo:0,cuota:0,paso:0,historial:[],hucha:0,ocultar:true};
+let R={
+  banca:0,
+  bancaInicial:0,
+  objetivo:0,
+  cuota:0,
+  paso:0,
+  totalPasos:0,
+  historial:[],
+  ocultar:true
+};
 const Rels={
   saldo:document.getElementById('r-saldo'),obj:document.getElementById('r-objetivo'),cuota:document.getElementById('r-cuota'),
   calc:document.getElementById('r-calcular'),rein:document.getElementById('r-reiniciar'),
@@ -308,75 +313,148 @@ const Rels={
   deporte:document.getElementById('r-deporte'),evento:document.getElementById('r-evento'),pron:document.getElementById('r-pronostico'),
   cuotaReal:document.getElementById('r-cuota-real'),win:document.getElementById('r-win'),lose:document.getElementById('r-lose'),
   toggle:document.getElementById('r-toggle'),histDet:document.getElementById('r-hist-det'),
-  hist:document.getElementById('r-historial'),hucha:document.getElementById('hucha')
+  hist:document.getElementById('r-historial')
 };
+rUpdateToggleState(false);
 function rSave(){ localStorage.setItem('reto', JSON.stringify(R)); }
 function rLoad(){
   try{
     const d=JSON.parse(localStorage.getItem('reto')||'{}');
     Object.assign(R,{...R,...d});
-    if(R.banca>0 && R.objetivo>0 && R.cuota>1) rRenderAll();
+    if(!R.bancaInicial && R.banca>0) R.bancaInicial=R.banca;
+    if(typeof R.totalPasos!=='number') R.totalPasos=0;
+    if(R.banca>0 && R.objetivo>0 && R.cuota>1){
+      if(!R.paso) R.paso=1;
+      if(R.totalPasos<=0){
+        const remaining=R.banca>=R.objetivo?0:Math.ceil(Math.log(R.objetivo/R.banca)/Math.log(R.cuota));
+        R.totalPasos=Math.max(0,remaining+Math.max(0,(R.paso||1)-1));
+      }
+      rRenderAll();
+    }
   }catch{}
 }
-function rReset(hard=false){
-  R={banca:0,objetivo:0,cuota:0,paso:0,historial:[],hucha: hard?0:R.hucha, ocultar:true};
+function rReset(){
+  R={
+    banca:0,
+    bancaInicial:0,
+    objetivo:0,
+    cuota:0,
+    paso:0,
+    totalPasos:0,
+    historial:[],
+    ocultar:true
+  };
   Rels.saldo.value=''; Rels.obj.value=''; Rels.cuota.value='';
   Rels.boxEstado.style.display='none';
   Rels.hist.innerHTML=''; Rels.histDet.open=false;
-  rUpdateHucha(); rSave();
+  rUpdateToggleState(false);
+  rUpdateControls(false);
+  rSave();
 }
-function rUpdateHucha(){ Rels.hucha.textContent=`💎 Hucha: ${R.hucha.toFixed(2)} €`; }
 function rPlan(){
   const banca=parseFloat(Rels.saldo.value)||0;
   const objetivo=parseFloat(Rels.obj.value)||0;
   const cuota=parseFloat(Rels.cuota.value)||0;
   if(banca<=0||objetivo<=0||cuota<=1) return alert('Datos inválidos');
-  R.banca=banca; R.objetivo=objetivo; R.cuota=cuota; R.paso=1; R.historial=[];
+  const ratio=objetivo/banca;
+  let pasos=ratio>1?Math.ceil(Math.log(ratio)/Math.log(cuota)):0;
+  if(!Number.isFinite(pasos) || pasos<0) pasos=0;
+  R.banca=banca;
+  R.bancaInicial=banca;
+  R.objetivo=objetivo;
+  R.cuota=cuota;
+  R.paso=1;
+  R.totalPasos=pasos;
+  R.historial=[];
+  R.ocultar=true;
   rRenderAll(); rSave();
 }
 function rProximoTexto(){
-  const apuesta = R.banca.toFixed(2);
-  const post = (R.banca*R.cuota).toFixed(2);
-  return `Apuesta: <b>${apuesta}€</b> @ cuota fija <b>${R.cuota}</b><br>Banca tras paso: <b>${post}€</b> (Paso ${R.paso}/${Math.max(1,Math.ceil(Math.log(R.objetivo/R.banca)/Math.log(R.cuota)))})`;
+  const apuesta=R.banca.toFixed(2);
+  const post=(R.banca*R.cuota).toFixed(2);
+  return `Apuesta: <b>${apuesta}€</b> @ cuota fija <b>${R.cuota}</b><br>Banca tras paso: <b>${post}€</b> (Paso ${R.paso}/${Math.max(1,R.totalPasos||1)})`;
 }
 function rRenderAll(){
   Rels.boxEstado.style.display='';
-  Rels.proximo.innerHTML=rProximoTexto();
-  Rels.bancaIni.textContent=`${(R.banca).toFixed(2)}€`;
+  const completado=rIsCompletado();
+  Rels.proximo.innerHTML=completado?rTextoCompletado():rProximoTexto();
+  Rels.bancaIni.textContent=`${(R.bancaInicial||0).toFixed(2)}€`;
   Rels.objetivoLbl.textContent=`${R.objetivo.toFixed(2)}€`;
-  rRenderHist(); rUpdateHucha();
+  rRenderHist();
+  rUpdateControls(completado);
+}
+function rUpdateToggleState(hasHist){
+  Rels.toggle.disabled=!hasHist;
+  const label = hasHist
+    ? (R.ocultar ? '👁️ Mostrar todos' : '🙈 Ocultar todos')
+    : '👁️ Mostrar todos';
+  Rels.toggle.textContent = label;
 }
 function rRenderHist(){
-  if(!R.historial.length){ Rels.hist.textContent='Sin historial.'; return; }
+  const hasHist = R.historial.length>0;
+  if(!hasHist){
+    R.ocultar=true;
+    Rels.hist.textContent='Sin historial.';
+    Rels.histDet.open=false;
+    rUpdateToggleState(false);
+    return;
+  }
+  Rels.histDet.open=!R.ocultar;
   const rows = R.historial.map(h=>{
     return `<details ${R.ocultar?'':'open'} class="history">
       <summary>${h.head}</summary><div style="margin-top:6px">${h.body}</div>
     </details>`;
   });
   Rels.hist.innerHTML=rows.join('');
+  rUpdateToggleState(true);
 }
 function rWin(){
+  const deporte = (Rels.deporte.value||'—').trim()||'—';
+  const evento = (Rels.evento.value||'—').trim()||'—';
+  const pronostico = (Rels.pron.value||'—').trim()||'—';
   const cuotaReal = parseFloat(Rels.cuotaReal.value)||R.cuota;
   const post = R.banca * cuotaReal;
   const ganancia = post - R.banca;
-  const aHucha = Math.max(0, ganancia*0.05);
-  R.hucha += aHucha;
+  const pasoActual = R.paso||1;
+  const apuesta = R.banca;
   R.banca = post;
   R.historial.push({
-    head:`✅ Win paso ${R.paso} — +${ganancia.toFixed(2)}€ (cuota ${cuotaReal})`,
-    body:`🧾 ${R.deporte||Rels.deporte.value||'-'} — ${R.evento||Rels.evento.value||'-'} — ${R.pron||Rels.pron.value||'-'}<br>Apuesta ${(post/cuotaReal).toFixed(2)}€ → Banca: ${post.toFixed(2)}€ — Hucha +${aHucha.toFixed(2)}€`
+    head:`✅ Win paso ${pasoActual} — +${ganancia.toFixed(2)}€ (cuota ${cuotaReal})`,
+    body:`🧾 ${deporte} — ${evento} — ${pronostico}<br>Apuesta ${apuesta.toFixed(2)}€ → Banca: ${post.toFixed(2)}€`
   });
-  R.paso++; Rels.deporte.value=''; Rels.evento.value=''; Rels.pron.value=''; Rels.cuotaReal.value='';
+  R.paso = R.totalPasos>0 ? Math.min(R.totalPasos+1,(R.paso||1)+1) : (R.paso||1)+1;
+  Rels.deporte.value=''; Rels.evento.value=''; Rels.pron.value=''; Rels.cuotaReal.value='';
   rRenderAll(); rSave();
 }
 function rLose(){
   R.historial.push({head:`❌ Lose en paso ${R.paso}`,body:`Se reinicia el reto.`});
-  alert('Reto perdido. Reiniciando (se mantiene hucha).');
-  rReset(false); rSave();
+  alert('Reto perdido. Reiniciando el plan.');
+  rReset(); rSave();
 }
-function rToggle(){ R.ocultar=!R.ocultar; rRenderHist(); }
+function rToggle(){ R.ocultar=!R.ocultar; rRenderHist(); rSave(); }
+function rIsCompletado(){
+  if(!R.objetivo || !R.cuota) return false;
+  if(R.totalPasos===0) return true;
+  if(R.banca>=R.objetivo) return true;
+  return (R.paso||1) > R.totalPasos;
+}
+function rTextoCompletado(){
+  const extra = R.banca>R.objetivo ? ` Has superado el objetivo por ${(R.banca-R.objetivo).toFixed(2)}€.` : '';
+  return `🎉 Reto completado. Banca actual: <b>${R.banca.toFixed(2)}€</b>.${extra}`;
+}
+function rUpdateControls(completado){
+  Rels.win.disabled=completado;
+  Rels.lose.disabled=completado;
+  if(completado){
+    Rels.win.setAttribute('aria-disabled','true');
+    Rels.lose.setAttribute('aria-disabled','true');
+  }else{
+    Rels.win.removeAttribute('aria-disabled');
+    Rels.lose.removeAttribute('aria-disabled');
+  }
+}
 Rels.calc.onclick=rPlan;
-Rels.rein.onclick=()=>{ if(confirm('¿Reiniciar TODO el reto? (se mantiene la hucha)')) rReset(false); };
+Rels.rein.onclick=()=>{ if(confirm('¿Reiniciar TODO el reto?')) rReset(); };
 Rels.win.onclick=rWin;
 Rels.lose.onclick=rLose;
 Rels.toggle.onclick=rToggle;
