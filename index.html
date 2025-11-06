@@ -25,7 +25,19 @@ header{
   border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
   z-index:60;box-shadow:0 0 30px #00fff233;height:var(--nav-height);
 }
-.brand{color:var(--neon);font-size:1.05rem;text-shadow:0 0 8px var(--neon);user-select:none}
+.brand{color:var(--neon);font-size:1.05rem;text-shadow:0 0 8px var(--neon);user-select:none;letter-spacing:0.08em}
+.nav-toggle{
+  display:none;
+  background:rgba(0,255,242,0.15);
+  border:1px solid var(--line);
+  color:var(--neon);
+  border-radius:10px;
+  padding:6px 10px;
+  font-size:1.2rem;
+  cursor:pointer;
+  box-shadow:0 0 18px #00fff233;
+}
+.nav-toggle:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
 nav.desktop{display:flex;gap:14px;align-items:center}
 .nav-link{
   color:var(--fg); text-decoration:none; padding:8px 12px; border-radius:999px;
@@ -45,14 +57,74 @@ main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:cen
 .panel{background:var(--panel);border-radius:14px;padding:22px;border:1px solid var(--line);box-shadow:0 0 30px #00fff233;margin:22px 0}
 .hero{
   background:linear-gradient(180deg,rgba(0,0,0,0.22),transparent);
-  padding:28px;border-radius:14px;border:1px solid var(--line);
+  padding:32px;border-radius:14px;border:1px solid var(--line);
   box-shadow:0 0 40px #00fff233;
 }
-.hero h1{color:var(--neon);text-shadow:0 0 12px var(--neon);margin:0 0 6px;font-size:1.6rem}
-.hero p{color:#bfc7c9;margin-top:8px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:30px;align-items:stretch}
+.hero-main{display:grid;grid-template-rows:auto 1fr;gap:26px}
+.hero-side{display:flex;flex-direction:column;gap:18px}
+.clock-tile{
+  position:relative;overflow:hidden;border-radius:14px;padding:26px;
+  border:1px solid rgba(45,212,191,0.2);
+  background:radial-gradient(circle at top left,rgba(0,255,242,0.18),rgba(5,10,20,0.9));
+  box-shadow:0 0 30px rgba(0,255,242,0.25);
+  display:flex;flex-direction:column;gap:10px;align-items:flex-start;
+}
+.clock-tile::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(0,255,242,0.25),transparent);
+  opacity:0;animation:clockSweep 8s linear infinite;
+}
+.clock-time{font-size:2.6rem;letter-spacing:0.1em;color:var(--neon);text-shadow:0 0 18px rgba(0,255,242,0.65);margin:0}
+.clock-date{color:#b9d5d3;font-size:0.95rem;text-transform:capitalize}
+.clock-tz{
+  display:inline-flex;align-items:center;gap:6px;margin-top:2px;padding:6px 12px;border-radius:999px;
+  background:rgba(0,255,242,0.16);color:#6bded8;font-size:0.85rem;
+  border:1px solid rgba(45,212,191,0.35);
+}
+.hero-main-body h1{color:var(--neon);text-shadow:0 0 12px var(--neon);margin:0 0 6px;font-size:1.75rem}
+.hero-main-body p{color:#bfc7c9;margin-top:8px;line-height:1.5}
+.hero-actions{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;
+  text-decoration:none;font-size:0.95rem;font-weight:bold;color:#001214;
+  background:linear-gradient(90deg,var(--neon),var(--accent));box-shadow:0 0 18px rgba(0,255,242,0.35);
+  transition:transform .14s,box-shadow .14s;
+}
+.hero-btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,255,242,0.25)}
+.hero-btn.ghost{
+  background:rgba(12,16,20,0.9);color:var(--neon);border:1px solid rgba(45,212,191,0.45);
+  box-shadow:none;
+}
+.hero-highlight{
+  position:relative;border-radius:14px;padding:20px 20px 22px;background:rgba(8,12,16,0.85);
+  border:1px solid rgba(45,212,191,0.18);box-shadow:0 20px 35px rgba(0,0,0,0.35);
+}
+.hero-highlight-title{color:#80f7f0;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
+.hero-highlight p{margin:0;color:#d7e9e7;font-size:0.95rem;line-height:1.6}
+.pulse-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);
+  position:absolute;top:18px;right:20px;animation:pulse 1.8s ease-in-out infinite}
+.quick-stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:18px}
+.quick-card{
+  border-radius:12px;padding:16px 18px;background:rgba(12,16,20,0.88);
+  border:1px solid rgba(45,212,191,0.12);box-shadow:0 18px 28px rgba(0,0,0,0.35);
+}
+.quick-card-label{font-size:0.8rem;color:#6bded8;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
+.quick-card-value{color:#e9fffd;font-size:1.05rem;font-weight:600}
+.quick-card-note{color:#99bebb;font-size:0.85rem;margin-top:4px}
+
+@keyframes clockSweep{
+  0%{opacity:0;transform:translateX(-40%)}
+  25%{opacity:0.55}
+  50%{opacity:0.2}
+  100%{opacity:0;transform:translateX(40%)}
+}
+@keyframes pulse{
+  0%,100%{opacity:0.35;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.3)}
+}
 
 /* === CARDS / GRID === */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
 .card{
   background:rgba(12,16,20,0.85);padding:18px;border-radius:10px;
   border:1px solid rgba(45,212,191,0.06);color:#cfe7e5;position:relative;
@@ -68,6 +140,14 @@ input, select{
   border-radius:8px;padding:8px 10px;color:var(--fg);
   font-size:0.95rem;outline:none;width:100%;
 }
+
+.sport-picker{position:relative;display:flex;flex-direction:column}
+.sport-picker select{appearance:none;padding-right:34px;background-image:linear-gradient(90deg,rgba(0,255,242,0.12),rgba(20,184,166,0.08));cursor:pointer;}
+.sport-picker::after{content:'⌄';position:absolute;right:12px;top:12px;color:var(--accent);pointer-events:none;font-size:0.9rem}
+.reto-progress{margin-top:14px;display:flex;flex-direction:column;gap:6px}
+.reto-progress-text{display:flex;justify-content:space-between;font-size:0.85rem;color:#9fb1b0}
+.reto-progress-bar{height:8px;border-radius:999px;background:rgba(255,255,255,0.08);overflow:hidden}
+#r-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--neon),var(--accent));transition:width .5s ease}
 button{
   background:linear-gradient(90deg,var(--neon),var(--accent));
   border:none;border-radius:8px;padding:9px 14px;color:#001214;
@@ -83,25 +163,74 @@ button:hover{transform:scale(0.97);}
 #docker-card:hover .tooltip{display:block}
 
 /* === Reto === */
-#reto-form .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+#reto-form .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 #reto-acciones{display:flex;gap:10px;flex-wrap:wrap}
-#hucha{color:var(--neon);text-shadow:0 0 8px var(--neon);border:1px solid var(--line);
-  padding:10px 12px;border-radius:10px;background:rgba(12,16,20,0.88);display:inline-block;margin-top:10px}
 .history{margin-top:12px;color:#9fb1b0;font-size:0.9rem;border-top:1px solid var(--line);padding-top:8px}
 details summary{cursor:pointer;color:var(--accent);user-select:none}
 details[open] summary{color:var(--neon)}
 
+/* === Docker === */
+
 /* === Responsive === */
-@media(max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} #reto-form .row{grid-template-columns:1fr} }
-@media(max-width:520px){ .grid{grid-template-columns:1fr} }
+@media(max-width:1024px){
+  header{width:95%;padding:10px 16px}
+  main{padding-top:calc(var(--nav-height) + 16px)}
+  .hero-grid{grid-template-columns:1fr;gap:24px}
+  .hero-main{grid-template-rows:repeat(2,auto)}
+}
+@media(max-width:820px){
+  header{padding:12px 18px;gap:12px}
+  .nav-toggle{display:block}
+  nav.desktop{
+    position:absolute;right:18px;top:calc(100% + 12px);
+    background:rgba(8,12,16,0.94);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px;
+    flex-direction:column;
+    width:180px;
+    box-shadow:0 20px 40px #00fff233;
+    display:none;
+  }
+  nav.desktop.open{display:flex}
+  .nav-link{padding:10px 12px;width:100%;text-align:left}
+  .nav-link.active{padding:10px 12px}
+}
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  #reto-form .row{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:720px){
+  main{padding-top:calc(var(--nav-height) + 22px)}
+  .container{width:94%}
+  .grid{grid-template-columns:1fr}
+  #reto-form .row{grid-template-columns:1fr}
+  #reto-estado>div:first-child{font-size:0.95rem}
+  #reto-acciones{gap:8px}
+  .hero{padding:26px}
+  .clock-time{font-size:2.1rem}
+  .quick-stack{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  header{left:50%;transform:translateX(-50%);border-radius:12px}
+  .hero-main-body h1{font-size:1.35rem}
+  button{width:100%}
+  #reto-acciones{flex-direction:column}
+  .sport-picker select{padding-right:40px}
+  .nav-toggle{width:auto;align-self:flex-end}
+  .hero-actions{flex-direction:column}
+  .hero-btn{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="brand">OLIVER CLOUD SYSTEMS</div>
-  <nav class="desktop">
+  <button class="nav-toggle" aria-label="Abrir navegación" aria-expanded="false" aria-controls="main-nav">☰</button>
+  <nav id="main-nav" class="desktop">
     <a href="#" class="nav-link active" data-section="home">Inicio</a>
     <a href="#" class="nav-link" data-section="wireguard">WireGuard</a>
+    <a href="#" class="nav-link" data-section="docker">Próximo proyecto</a>
     <a href="#" class="nav-link" data-section="reto">Reto</a>
     <a href="#" class="nav-link" data-section="system">Sistema</a>
   </nav>
@@ -111,8 +240,54 @@ details[open] summary{color:var(--neon)}
   <div class="container">
     <!-- HOME -->
     <section id="section-home" class="panel hero">
-      <h1>Bienvenido, Oliver</h1>
-      <p>Panel principal — cada pestaña carga bajo demanda. No hay refresco automático salvo al volver de otra pestaña.</p>
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div class="clock-tile" aria-live="polite">
+            <div class="clock-time" id="hero-clock-time">--:--:--</div>
+            <div class="clock-date" id="hero-clock-date">Sincronizando fecha…</div>
+            <span class="clock-tz" id="hero-clock-tz">Zona horaria local</span>
+          </div>
+          <div class="hero-main-body">
+            <h1>Centro de mando de Oliver</h1>
+            <p id="hero-tagline">Panel principal en espera de instrucciones.</p>
+            <div class="hero-actions">
+              <a href="#" class="hero-btn" data-jump-section="wireguard">⚡ Monitor WireGuard</a>
+              <a href="#" class="hero-btn" data-jump-section="docker">🚧 Próximo proyecto</a>
+              <a href="#" class="hero-btn" data-jump-section="reto">🎯 Abrir reto</a>
+              <a href="#" class="hero-btn ghost" data-jump-section="system">🛠️ Estado del sistema</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="hero-highlight">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <div class="hero-highlight-title">Pulso en directo</div>
+            <p id="hero-highlight-text">Todo listo para despegar. Usa las tarjetas para empezar.</p>
+          </div>
+          <div class="quick-stack">
+            <div class="quick-card">
+              <div class="quick-card-label">WireGuard</div>
+              <div class="quick-card-value" id="hero-wg-status">Pendiente de actualizar</div>
+              <div class="quick-card-note" id="hero-wg-note">Toca el monitor para consultar la API.</div>
+            </div>
+            <div class="quick-card">
+              <div class="quick-card-label">Próximo proyecto</div>
+              <div class="quick-card-value" id="hero-docker-status">Espacio reservado</div>
+              <div class="quick-card-note" id="hero-docker-note">Personaliza esta pestaña cuando definas el módulo.</div>
+            </div>
+            <div class="quick-card">
+              <div class="quick-card-label">Sistema</div>
+              <div class="quick-card-value" id="hero-system-status">Sincronización en espera</div>
+              <div class="quick-card-note" id="hero-system-note">Abre la pestaña “Sistema” para refrescar.</div>
+            </div>
+            <div class="quick-card">
+              <div class="quick-card-label">Reto activo</div>
+              <div class="quick-card-value" id="hero-reto-status">Sin plan configurado</div>
+              <div class="quick-card-note" id="hero-reto-note">Calcula la banca y objetivos para empezar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- WIREGUARD -->
@@ -124,6 +299,16 @@ details[open] summary{color:var(--neon)}
           <div class="value" id="wg-summary">Pulsa la pestaña para cargar.</div>
         </div>
         <div id="wg-peers" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+    <!-- PROXIMO PROYECTO -->
+    <section id="section-docker" class="panel" style="display:none">
+      <h2>Próximo proyecto</h2>
+      <div class="card">
+        <div class="title">🚧 En construcción</div>
+        <div class="value">Aquí irá el siguiente proyecto cuando definas la integración.</div>
+        <div class="quick-card-note">Prepara tus APIs con calma; este espacio ya está listo para adaptarse.</div>
       </div>
     </section>
 
@@ -148,10 +333,31 @@ details[open] summary{color:var(--neon)}
         <div style="margin:12px 0;border-top:1px solid var(--line)"></div>
 
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
-          <input id="r-deporte" placeholder="🌐 Deporte">
+          <div class="sport-picker">
+            <select id="r-deporte">
+              <option value="" data-icon="🌐">🌐 Selecciona deporte</option>
+              <option value="futbol" data-icon="⚽️">⚽️ Fútbol</option>
+              <option value="baloncesto" data-icon="🏀">🏀 Baloncesto</option>
+              <option value="tenis" data-icon="🎾">🎾 Tenis</option>
+              <option value="esports" data-icon="🎮">🎮 eSports</option>
+              <option value="mma" data-icon="🥊">🥊 MMA / Lucha</option>
+              <option value="carreras" data-icon="🏁">🏁 Motor / Carreras</option>
+              <option value="otros" data-icon="🌟">🌟 Otros</option>
+            </select>
+          </div>
           <input id="r-evento" placeholder="⌗ Evento/Partido">
           <input id="r-pronostico" placeholder="🎯 Pronóstico">
           <input id="r-cuota-real" placeholder="💵 Cuota real (opcional)" type="number" step="0.01" min="1.01">
+        </div>
+
+        <div class="reto-progress" aria-live="polite">
+          <div class="reto-progress-text">
+            <span id="r-progress-label">Paso 0 / 0</span>
+            <span id="r-progress-porc">0%</span>
+          </div>
+          <div class="reto-progress-bar">
+            <div id="r-progress-fill"></div>
+          </div>
         </div>
 
         <div id="reto-acciones" style="margin-top:12px">
@@ -159,8 +365,6 @@ details[open] summary{color:var(--neon)}
           <button id="r-lose" style="background:linear-gradient(90deg,#ff6b6b,#ef4444)">❌ Lose</button>
           <button id="r-toggle" style="background:linear-gradient(90deg,#06b6d4,#22d3ee)">👁️ Ver/Ocultar todos</button>
         </div>
-
-        <div id="hucha">💎 Hucha: 0.00 €</div>
 
         <details id="r-hist-det" class="history" style="margin-top:10px">
           <summary>📘 Ver historial</summary>
@@ -198,27 +402,146 @@ let currentSection='home';
 const sections={
   home:document.getElementById('section-home'),
   wireguard:document.getElementById('section-wireguard'),
+  docker:document.getElementById('section-docker'),
   reto:document.getElementById('section-reto'),
   system:document.getElementById('section-system')
 };
+const navToggle=document.querySelector('.nav-toggle');
+const navBar=document.getElementById('main-nav');
+const heroEls={
+  clockTime:document.getElementById('hero-clock-time'),
+  clockDate:document.getElementById('hero-clock-date'),
+  clockTz:document.getElementById('hero-clock-tz'),
+  tagline:document.getElementById('hero-tagline'),
+  highlight:document.getElementById('hero-highlight-text'),
+  cards:{
+    wg:{value:document.getElementById('hero-wg-status'),note:document.getElementById('hero-wg-note')},
+    docker:{value:document.getElementById('hero-docker-status'),note:document.getElementById('hero-docker-note')},
+    system:{value:document.getElementById('hero-system-status'),note:document.getElementById('hero-system-note')},
+    reto:{value:document.getElementById('hero-reto-status'),note:document.getElementById('hero-reto-note')}
+  }
+};
+
+const HERO_TAGLINES=[
+  'Control total de redes, apuestas y sistema desde una sola cabina.',
+  'Lanza los chequeos cuando quieras y mantén la cabina en verde.',
+  'Ajusta tu reto mientras vigilas WireGuard y el servidor en paralelo.',
+  'Diseñado para Oliver: rápido, oscuro y con atajos directos.'
+];
+const HERO_HIGHLIGHTS=[
+  'Tip: guarda tu plan del reto y volverá exactamente donde lo dejaste.',
+  'Recuerda revisar los peers activos de WireGuard tras cada despliegue.',
+  'Reserva la pestaña “Próximo proyecto” para tu siguiente idea grande.',
+  '¿Necesitas foco? Cierra el menú con el botón hamburguesa en móviles.'
+];
+
+function updateNavToggle(expanded){
+  if(!navToggle) return;
+  navToggle.setAttribute('aria-expanded', String(expanded));
+  navToggle.setAttribute('aria-label', expanded ? 'Cerrar navegación' : 'Abrir navegación');
+}
+if(navToggle && navBar){
+  navToggle.addEventListener('click',()=>{
+    const expanded=navToggle.getAttribute('aria-expanded')==='true';
+    const next=!expanded;
+    updateNavToggle(next);
+    navBar.classList.toggle('open',next);
+  });
+  updateNavToggle(false);
+}
+
+function switchSection(section){
+  if(!sections[section]) return;
+  document.querySelectorAll('.nav-link').forEach(x=>{
+    x.classList.toggle('active', x.dataset.section===section);
+  });
+  Object.entries(sections).forEach(([key,sec])=>{
+    sec.style.display = key===section ? '' : 'none';
+  });
+  currentSection=section;
+  if(section==='wireguard') loadWG();
+  if(section==='docker') loadDocker();
+  if(section==='system') loadSystem();
+  if(navToggle && navBar){
+    navBar.classList.remove('open');
+    updateNavToggle(false);
+  }
+}
+
 document.querySelectorAll('.nav-link').forEach(a=>{
   a.addEventListener('click',ev=>{
     ev.preventDefault();
-    document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));
-    a.classList.add('active');
-    Object.values(sections).forEach(s=>s.style.display='none');
-    sections[a.dataset.section].style.display='';
-    currentSection=a.dataset.section;
-    if(currentSection==='wireguard') loadWG();
-    if(currentSection==='system') loadSystem();
+    switchSection(a.dataset.section);
   });
 });
+
+document.querySelectorAll('[data-jump-section]').forEach(btn=>{
+  btn.addEventListener('click',ev=>{
+    ev.preventDefault();
+    const target=btn.getAttribute('data-jump-section');
+    switchSection(target||'home');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+startHeroClock();
+startHeroTaglines();
+startHeroHighlights();
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'){
     if(currentSection==='wireguard') loadWG();
+    if(currentSection==='docker') loadDocker();
     if(currentSection==='system') loadSystem();
   }
 });
+
+function heroSetCard(key,status,note){
+  const card=heroEls.cards[key];
+  if(!card) return;
+  if(card.value && typeof status==='string') card.value.textContent=status;
+  if(card.note && typeof note==='string') card.note.textContent=note;
+}
+function heroNowLabel(){
+  return new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date());
+}
+function startHeroClock(){
+  if(!heroEls.clockTime || !heroEls.clockDate) return;
+  try{
+    const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Horario local';
+    if(heroEls.clockTz) heroEls.clockTz.textContent=tz;
+  }catch{
+    if(heroEls.clockTz) heroEls.clockTz.textContent='Horario local';
+  }
+  const fmtTime=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const fmtDate=new Intl.DateTimeFormat('es-ES',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  const tick=()=>{
+    const now=new Date();
+    heroEls.clockTime.textContent=fmtTime.format(now);
+    heroEls.clockDate.textContent=fmtDate.format(now);
+  };
+  tick();
+  setInterval(tick,1000);
+}
+function startHeroTaglines(){
+  if(!heroEls.tagline || !HERO_TAGLINES.length) return;
+  let idx=Math.floor(Math.random()*HERO_TAGLINES.length);
+  const rotate=()=>{
+    heroEls.tagline.textContent=HERO_TAGLINES[idx];
+    idx=(idx+1)%HERO_TAGLINES.length;
+  };
+  rotate();
+  setInterval(rotate,8000);
+}
+function startHeroHighlights(){
+  if(!heroEls.highlight || !HERO_HIGHLIGHTS.length) return;
+  let idx=Math.floor(Math.random()*HERO_HIGHLIGHTS.length);
+  const rotate=()=>{
+    heroEls.highlight.textContent=HERO_HIGHLIGHTS[idx];
+    idx=(idx+1)%HERO_HIGHLIGHTS.length;
+  };
+  rotate();
+  setInterval(rotate,9000);
+}
 
 /* ====== WireGuard ====== */
 async function loadWG(){
@@ -228,16 +551,19 @@ async function loadWG(){
   s.textContent='Estado: comprobando...';
   sm.textContent='Cargando...';
   peersBox.innerHTML='';
+  heroSetCard('wg','Comprobando…','Consultando estado en vivo');
   try{
     const res=await fetch('https://api.olivercloud.es/api/wg/status',{cache:'no-store'});
     const d=await res.json();
     if(!d || d.status!=='ok' || !d.running){
       s.textContent='🔴 Inactivo';
       sm.textContent=d?.message||'WireGuard no disponible';
+      heroSetCard('wg','🔴 Inactivo', d?.message ? d.message : 'WireGuard no disponible');
       return;
     }
     s.innerHTML='<span style="color:#22c55e">🟢 Activo</span>';
     sm.innerHTML=`Peers: ${d.peers_active||0}/${d.peers_total||0}<br>Último handshake: ${d.last_handshake||'N/A'}<br>RX/TX: ${d.rx||'0 B'} / ${d.tx||'0 B'}`;
+    heroSetCard('wg',`🟢 ${d.peers_active||0}/${d.peers_total||0} peers`,`Actualizado ${heroNowLabel()}`);
     if(Array.isArray(d.peers) && d.peers.length){
       d.peers.forEach(p=>{
         const box=document.createElement('div');
@@ -255,13 +581,20 @@ async function loadWG(){
     }
   }catch(e){
     s.textContent='⚠️ Error'; sm.textContent='No se pudo conectar con la API';
+    heroSetCard('wg','⚠️ Error','No se pudo conectar con la API');
   }
+}
+
+/* ====== Docker ====== */
+function loadDocker(){
+  heroSetCard('docker','🚧 En construcción','Personaliza este módulo cuando esté listo.');
 }
 
 /* ====== Sistema ====== */
 async function loadSystem(){
   const E=(id)=>document.getElementById(id);
   const set=(id,v)=>E(id).textContent=v;
+  heroSetCard('system','Sincronizando…','Obteniendo estado del sistema');
   try{
     const res=await fetch('https://api.olivercloud.es/api/system/status',{cache:'no-store'});
     const d=await res.json();
@@ -291,96 +624,247 @@ async function loadSystem(){
     E('s-docker-tip').textContent = names.length
       ? 'Contenedores activos:\n' + names.map(n=>'• '+n).join('\n')
       : 'Contenedores activos:\nNinguno';
+    heroSetCard('system',`🟢 CPU ${Math.round(cpuNum)}%`,`Actualizado ${heroNowLabel()}`);
   }catch(e){
     set('s-hostname','Error'); set('s-os','Error'); set('s-uptime','Error');
     set('s-cpu','N/A'); set('s-ram','N/A'); set('s-disk','N/A'); set('s-temp','N/A'); set('s-docker','N/A'); set('s-ip','N/A');
     E('s-docker-tip').textContent='No se pudo obtener info';
+    heroSetCard('system','⚠️ Error','Reintenta en unos segundos');
   }
 }
 
 /* ====== RETO ====== */
-let R={banca:0,objetivo:0,cuota:0,paso:0,historial:[],hucha:0,ocultar:true};
+let R={
+  banca:0,
+  bancaInicial:0,
+  objetivo:0,
+  cuota:0,
+  paso:0,
+  totalPasos:0,
+  historial:[],
+  ocultar:true
+};
+const SPORTS={
+  futbol:{icon:'⚽️',label:'Fútbol'},
+  baloncesto:{icon:'🏀',label:'Baloncesto'},
+  tenis:{icon:'🎾',label:'Tenis'},
+  esports:{icon:'🎮',label:'eSports'},
+  mma:{icon:'🥊',label:'MMA / Lucha'},
+  carreras:{icon:'🏁',label:'Motor / Carreras'},
+  otros:{icon:'🌟',label:'Otros'}
+};
 const Rels={
   saldo:document.getElementById('r-saldo'),obj:document.getElementById('r-objetivo'),cuota:document.getElementById('r-cuota'),
   calc:document.getElementById('r-calcular'),rein:document.getElementById('r-reiniciar'),
   boxEstado:document.getElementById('reto-estado'),proximo:document.getElementById('r-proximo'),
   bancaIni:document.getElementById('r-banca-inicial'),objetivoLbl:document.getElementById('r-objetivo-lbl'),
-  deporte:document.getElementById('r-deporte'),evento:document.getElementById('r-evento'),pron:document.getElementById('r-pronostico'),
+  deporte:document.getElementById('r-deporte'),
+  evento:document.getElementById('r-evento'),pron:document.getElementById('r-pronostico'),
   cuotaReal:document.getElementById('r-cuota-real'),win:document.getElementById('r-win'),lose:document.getElementById('r-lose'),
   toggle:document.getElementById('r-toggle'),histDet:document.getElementById('r-hist-det'),
-  hist:document.getElementById('r-historial'),hucha:document.getElementById('hucha')
+  hist:document.getElementById('r-historial'),progressFill:document.getElementById('r-progress-fill'),
+  progressLabel:document.getElementById('r-progress-label'),progressPorc:document.getElementById('r-progress-porc')
 };
+rUpdateToggleState(false);
+function rGetSportInfo(key){
+  if(!key) return {icon:'🌐',label:'Selecciona deporte'};
+  return SPORTS[key] || {icon:'🌐',label:'Personalizado'};
+}
 function rSave(){ localStorage.setItem('reto', JSON.stringify(R)); }
 function rLoad(){
   try{
     const d=JSON.parse(localStorage.getItem('reto')||'{}');
     Object.assign(R,{...R,...d});
-    if(R.banca>0 && R.objetivo>0 && R.cuota>1) rRenderAll();
+    if(!R.bancaInicial && R.banca>0) R.bancaInicial=R.banca;
+    if(typeof R.totalPasos!=='number') R.totalPasos=0;
+    if(R.banca>0 && R.objetivo>0 && R.cuota>1){
+      if(!R.paso) R.paso=1;
+      if(R.totalPasos<=0){
+        const remaining=R.banca>=R.objetivo?0:Math.ceil(Math.log(R.objetivo/R.banca)/Math.log(R.cuota));
+        R.totalPasos=Math.max(0,remaining+Math.max(0,(R.paso||1)-1));
+      }
+      rRenderAll();
+    }
   }catch{}
 }
-function rReset(hard=false){
-  R={banca:0,objetivo:0,cuota:0,paso:0,historial:[],hucha: hard?0:R.hucha, ocultar:true};
+function rReset(){
+  R={
+    banca:0,
+    bancaInicial:0,
+    objetivo:0,
+    cuota:0,
+    paso:0,
+    totalPasos:0,
+    historial:[],
+    ocultar:true
+  };
   Rels.saldo.value=''; Rels.obj.value=''; Rels.cuota.value='';
+  Rels.deporte.value='';
   Rels.boxEstado.style.display='none';
   Rels.hist.innerHTML=''; Rels.histDet.open=false;
-  rUpdateHucha(); rSave();
+  Rels.progressFill.style.width='0%';
+  Rels.progressLabel.textContent='Paso 0 / 0';
+  Rels.progressPorc.textContent='0%';
+  rUpdateToggleState(false);
+  rUpdateControls(false);
+  rSave();
+  heroUpdateRetoSummary();
 }
-function rUpdateHucha(){ Rels.hucha.textContent=`💎 Hucha: ${R.hucha.toFixed(2)} €`; }
 function rPlan(){
   const banca=parseFloat(Rels.saldo.value)||0;
   const objetivo=parseFloat(Rels.obj.value)||0;
   const cuota=parseFloat(Rels.cuota.value)||0;
   if(banca<=0||objetivo<=0||cuota<=1) return alert('Datos inválidos');
-  R.banca=banca; R.objetivo=objetivo; R.cuota=cuota; R.paso=1; R.historial=[];
+  const ratio=objetivo/banca;
+  let pasos=ratio>1?Math.ceil(Math.log(ratio)/Math.log(cuota)):0;
+  if(!Number.isFinite(pasos) || pasos<0) pasos=0;
+  R.banca=banca;
+  R.bancaInicial=banca;
+  R.objetivo=objetivo;
+  R.cuota=cuota;
+  R.paso=1;
+  R.totalPasos=pasos;
+  R.historial=[];
+  R.ocultar=true;
   rRenderAll(); rSave();
 }
 function rProximoTexto(){
-  const apuesta = R.banca.toFixed(2);
-  const post = (R.banca*R.cuota).toFixed(2);
-  return `Apuesta: <b>${apuesta}€</b> @ cuota fija <b>${R.cuota}</b><br>Banca tras paso: <b>${post}€</b> (Paso ${R.paso}/${Math.max(1,Math.ceil(Math.log(R.objetivo/R.banca)/Math.log(R.cuota)))})`;
+  const apuesta=R.banca.toFixed(2);
+  const post=(R.banca*R.cuota).toFixed(2);
+  return `Apuesta: <b>${apuesta}€</b> @ cuota fija <b>${R.cuota}</b><br>Banca tras paso: <b>${post}€</b> (Paso ${R.paso}/${Math.max(1,R.totalPasos||1)})`;
 }
 function rRenderAll(){
   Rels.boxEstado.style.display='';
-  Rels.proximo.innerHTML=rProximoTexto();
-  Rels.bancaIni.textContent=`${(R.banca).toFixed(2)}€`;
+  const completado=rIsCompletado();
+  Rels.proximo.innerHTML=completado?rTextoCompletado():rProximoTexto();
+  Rels.bancaIni.textContent=`${(R.bancaInicial||0).toFixed(2)}€`;
   Rels.objetivoLbl.textContent=`${R.objetivo.toFixed(2)}€`;
-  rRenderHist(); rUpdateHucha();
+  rRenderProgress(completado);
+  rRenderHist();
+  rUpdateControls(completado);
+  heroUpdateRetoSummary();
+}
+function rUpdateToggleState(hasHist){
+  Rels.toggle.disabled=!hasHist;
+  const label = hasHist
+    ? (R.ocultar ? '👁️ Mostrar todos' : '🙈 Ocultar todos')
+    : '👁️ Mostrar todos';
+  Rels.toggle.textContent = label;
 }
 function rRenderHist(){
-  if(!R.historial.length){ Rels.hist.textContent='Sin historial.'; return; }
+  const hasHist = R.historial.length>0;
+  if(!hasHist){
+    R.ocultar=true;
+    Rels.hist.textContent='Sin historial.';
+    Rels.histDet.open=false;
+    rUpdateToggleState(false);
+    return;
+  }
+  Rels.histDet.open=!R.ocultar;
   const rows = R.historial.map(h=>{
     return `<details ${R.ocultar?'':'open'} class="history">
       <summary>${h.head}</summary><div style="margin-top:6px">${h.body}</div>
     </details>`;
   });
   Rels.hist.innerHTML=rows.join('');
+  rUpdateToggleState(true);
 }
 function rWin(){
+  const sportKey = Rels.deporte.value;
+  const sportInfo = rGetSportInfo(sportKey);
+  const deporte = sportKey ? `${sportInfo.icon} ${sportInfo.label}` : '🌐 Libre';
+  const evento = (Rels.evento.value||'—').trim()||'—';
+  const pronostico = (Rels.pron.value||'—').trim()||'—';
   const cuotaReal = parseFloat(Rels.cuotaReal.value)||R.cuota;
   const post = R.banca * cuotaReal;
   const ganancia = post - R.banca;
-  const aHucha = Math.max(0, ganancia*0.05);
-  R.hucha += aHucha;
+  const pasoActual = R.paso||1;
+  const apuesta = R.banca;
   R.banca = post;
   R.historial.push({
-    head:`✅ Win paso ${R.paso} — +${ganancia.toFixed(2)}€ (cuota ${cuotaReal})`,
-    body:`🧾 ${R.deporte||Rels.deporte.value||'-'} — ${R.evento||Rels.evento.value||'-'} — ${R.pron||Rels.pron.value||'-'}<br>Apuesta ${(post/cuotaReal).toFixed(2)}€ → Banca: ${post.toFixed(2)}€ — Hucha +${aHucha.toFixed(2)}€`
+    head:`✅ Win paso ${pasoActual} — +${ganancia.toFixed(2)}€ (cuota ${cuotaReal})`,
+    body:`🧾 ${deporte} — ${evento} — ${pronostico}<br>Apuesta ${apuesta.toFixed(2)}€ → Banca: ${post.toFixed(2)}€`
   });
-  R.paso++; Rels.deporte.value=''; Rels.evento.value=''; Rels.pron.value=''; Rels.cuotaReal.value='';
+  R.paso = R.totalPasos>0 ? Math.min(R.totalPasos+1,(R.paso||1)+1) : (R.paso||1)+1;
+  Rels.deporte.value=''; Rels.evento.value=''; Rels.pron.value=''; Rels.cuotaReal.value='';
   rRenderAll(); rSave();
 }
 function rLose(){
   R.historial.push({head:`❌ Lose en paso ${R.paso}`,body:`Se reinicia el reto.`});
-  alert('Reto perdido. Reiniciando (se mantiene hucha).');
-  rReset(false); rSave();
+  alert('Reto perdido. Reiniciando el plan.');
+  rReset(); rSave();
 }
-function rToggle(){ R.ocultar=!R.ocultar; rRenderHist(); }
+function rToggle(){ R.ocultar=!R.ocultar; rRenderHist(); rSave(); }
+function rIsCompletado(){
+  if(!R.objetivo || !R.cuota) return false;
+  if(R.totalPasos===0) return true;
+  if(R.banca>=R.objetivo) return true;
+  return (R.paso||1) > R.totalPasos;
+}
+function rTextoCompletado(){
+  const extra = R.banca>R.objetivo ? ` Has superado el objetivo por ${(R.banca-R.objetivo).toFixed(2)}€.` : '';
+  return `🎉 Reto completado. Banca actual: <b>${R.banca.toFixed(2)}€</b>.${extra}`;
+}
+function rRenderProgress(completado){
+  const total = Math.max(0, R.totalPasos||0);
+  const pasoActual = Math.max(1, R.paso||1);
+  let pct=0;
+  if(total<=0){
+    pct = R.objetivo>0 ? Math.min(100, Math.round((R.banca/R.objetivo)*100)) : 0;
+    Rels.progressLabel.textContent = completado ? 'Reto completado' : `Paso ${pasoActual}`;
+  }else{
+    const realizados = Math.min(pasoActual-1,total);
+    pct = Math.round((realizados/total)*100);
+    Rels.progressLabel.textContent = completado ? `Paso ${total}/${total}` : `Paso ${Math.min(pasoActual,total)}/${total}`;
+  }
+  if(completado) pct=100;
+  pct=Math.max(0,Math.min(100,pct));
+  Rels.progressPorc.textContent=`${pct}%`;
+  Rels.progressFill.style.width=`${pct}%`;
+}
+function heroUpdateRetoSummary(){
+  const banca=R.banca||0;
+  const objetivo=R.objetivo||0;
+  if(!banca && !objetivo){
+    heroSetCard('reto','Sin plan configurado','Calcula la banca y objetivos para empezar.');
+    return;
+  }
+  if(!objetivo){
+    heroSetCard('reto','Plan incompleto','Añade un objetivo para calcular el reto.');
+    return;
+  }
+  if(rIsCompletado()){
+    heroSetCard('reto','🎉 Reto completado',`Banca: ${banca.toFixed(2)}€`);
+    return;
+  }
+  const total=Math.max(0,R.totalPasos||0);
+  const paso=Math.max(1,R.paso||1);
+  if(total>0){
+    const pct=Math.max(0,Math.min(100,Math.round(((paso-1)/total)*100)));
+    heroSetCard('reto',`Paso ${Math.min(paso,total)} / ${total}`,`Progreso ${pct}% — Banca ${banca.toFixed(2)}€`);
+  }else{
+    const pct=objetivo>0?Math.max(0,Math.min(100,Math.round((banca/objetivo)*100))):0;
+    heroSetCard('reto',`Progreso ${pct}%`,`Banca ${banca.toFixed(2)}€ de ${objetivo.toFixed(2)}€`);
+  }
+}
+function rUpdateControls(completado){
+  Rels.win.disabled=completado;
+  Rels.lose.disabled=completado;
+  if(completado){
+    Rels.win.setAttribute('aria-disabled','true');
+    Rels.lose.setAttribute('aria-disabled','true');
+  }else{
+    Rels.win.removeAttribute('aria-disabled');
+    Rels.lose.removeAttribute('aria-disabled');
+  }
+}
 Rels.calc.onclick=rPlan;
-Rels.rein.onclick=()=>{ if(confirm('¿Reiniciar TODO el reto? (se mantiene la hucha)')) rReset(false); };
+Rels.rein.onclick=()=>{ if(confirm('¿Reiniciar TODO el reto?')) rReset(); };
 Rels.win.onclick=rWin;
 Rels.lose.onclick=rLose;
 Rels.toggle.onclick=rToggle;
 rLoad();
+heroUpdateRetoSummary();
 </script>
 </body>
 </html>
