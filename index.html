@@ -863,6 +863,8 @@ Rels.rein.onclick=()=>{ if(confirm('¿Reiniciar TODO el reto?')) rReset(); };
 Rels.win.onclick=rWin;
 Rels.lose.onclick=rLose;
 Rels.toggle.onclick=rToggle;
+rUpdateSportPreview();
+Rels.deporte.addEventListener('change',rUpdateSportPreview);
 rLoad();
 heroUpdateRetoSummary();
 </script>
