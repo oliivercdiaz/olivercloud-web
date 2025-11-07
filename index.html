@@ -62,7 +62,7 @@ main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:cen
 }
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:30px;align-items:stretch}
 .hero-main{display:grid;grid-template-rows:auto 1fr;gap:26px}
-.hero-side{display:flex;flex-direction:column;gap:18px}
+.hero-side{display:flex;flex-direction:column;gap:18px;justify-content:flex-start}
 .clock-tile{
   position:relative;overflow:hidden;border-radius:14px;padding:26px;
   border:1px solid rgba(45,212,191,0.2);
@@ -95,58 +95,7 @@ main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:cen
   background:rgba(12,16,20,0.9);color:var(--neon);border:1px solid rgba(45,212,191,0.45);
   box-shadow:none;
 }
-.hero-highlight{
-  border-radius:14px;padding:22px 22px 24px;background:rgba(8,12,16,0.85);
-  border:1px solid rgba(45,212,191,0.18);box-shadow:0 20px 35px rgba(0,0,0,0.35);
-  display:flex;flex-direction:column;gap:14px;
-}
-.hero-highlight-title{color:#80f7f0;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px}
-.hero-highlight p{margin:0;color:#d7e9e7;font-size:0.95rem;line-height:1.6}
-.hero-mood{display:flex;align-items:center;gap:8px;color:#7ae7de;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em}
-.hero-mood strong{color:var(--neon);font-size:0.9rem;text-transform:none;letter-spacing:normal}
-.mood-chips{display:flex;flex-wrap:wrap;gap:8px}
-.mood-chip{
-  background:rgba(0,255,242,0.12);color:#80f7f0;border:1px solid rgba(45,212,191,0.35);
-  border-radius:999px;padding:6px 12px;font-size:0.85rem;cursor:pointer;
-  transition:transform .14s,box-shadow .14s;
-}
-.mood-chip:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(0,255,242,0.18)}
-.mood-chip.active{background:linear-gradient(90deg,rgba(0,255,242,0.95),rgba(20,184,166,0.9));color:#001214;border-color:transparent}
-.ambience-panel{
-  border-radius:14px;padding:20px 22px;background:rgba(8,12,16,0.85);
-  border:1px solid rgba(45,212,191,0.18);box-shadow:0 20px 35px rgba(0,0,0,0.3);
-  display:flex;flex-direction:column;gap:16px;
-}
-.ambience-header{display:flex;flex-direction:column;gap:6px}
-.ambience-title{color:#80f7f0;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase}
-.ambience-summary{color:#d7e9e7;font-size:0.95rem;line-height:1.5}
-.ambience-slider{display:flex;flex-direction:column;gap:8px}
-.ambience-slider label{display:flex;justify-content:space-between;color:#7ae7de;font-size:0.85rem;letter-spacing:0.04em;text-transform:uppercase}
-.ambience-slider input[type=range]{
-  -webkit-appearance:none;height:6px;border-radius:999px;
-  background:linear-gradient(90deg,rgba(0,255,242,0.4),rgba(20,184,166,0.3));
-  border:1px solid rgba(45,212,191,0.25);
-}
-.ambience-slider input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:18px;height:18px;border-radius:50%;
-  background:var(--neon);box-shadow:0 0 12px rgba(0,255,242,0.5);
-  border:none;cursor:pointer;
-}
-.ambience-slider input[type=range]::-moz-range-thumb{
-  width:18px;height:18px;border-radius:50%;background:var(--neon);
-  box-shadow:0 0 12px rgba(0,255,242,0.5);border:none;cursor:pointer;
-}
-.ambience-slider .ambience-scale{display:flex;justify-content:space-between;color:#627a79;font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase}
-.ambience-toggles{display:flex;flex-direction:column;gap:12px}
-.ambience-toggle{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 14px;border:1px solid rgba(45,212,191,0.16);border-radius:12px;background:rgba(5,12,18,0.85)}
-.ambience-toggle span strong{display:block;font-size:0.95rem;color:#e9fffd}
-.ambience-toggle span small{display:block;font-size:0.8rem;color:#8aa7a4;margin-top:4px;line-height:1.4}
-.ambience-toggle input{display:none}
-.ambience-switch{position:relative;width:48px;height:24px;border-radius:999px;background:rgba(0,255,242,0.15);border:1px solid rgba(45,212,191,0.3);flex-shrink:0;transition:background .2s}
-.ambience-switch .dot{position:absolute;top:3px;left:4px;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.8);box-shadow:0 0 8px rgba(255,255,255,0.3);transition:transform .2s,background .2s}
-.ambience-toggle input:checked + .ambience-switch{background:linear-gradient(90deg,var(--neon),var(--accent));box-shadow:0 0 14px rgba(0,255,242,0.35)}
-.ambience-toggle input:checked + .ambience-switch .dot{transform:translateX(22px);background:#001214}
-.quick-stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:18px}
+.quick-stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:0}
 .quick-card{
   border-radius:12px;padding:16px 18px;background:rgba(12,16,20,0.88);
   border:1px solid rgba(45,212,191,0.12);box-shadow:0 18px 28px rgba(0,0,0,0.35);
@@ -154,6 +103,18 @@ main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:cen
 .quick-card-label{font-size:0.8rem;color:#6bded8;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
 .quick-card-value{color:#e9fffd;font-size:1.05rem;font-weight:600}
 .quick-card-note{color:#99bebb;font-size:0.85rem;margin-top:4px}
+.project-card{display:flex;flex-direction:column;gap:12px}
+.project-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:0.9rem;color:#b9d5d3}
+.project-list li{display:flex;align-items:center;gap:8px}
+.project-list li::before{content:'•';color:var(--neon)}
+.project-link{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:6px;padding:10px 16px;border-radius:999px;font-weight:bold;
+  text-decoration:none;color:#001214;background:linear-gradient(90deg,var(--neon),var(--accent));
+  box-shadow:0 0 18px rgba(0,255,242,0.28);
+  transition:transform .14s,box-shadow .14s;
+}
+.project-link:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(0,255,242,0.22)}
 
 @keyframes clockSweep{
   0%{opacity:0;transform:translateX(-40%)}
@@ -284,11 +245,11 @@ details[open] summary{color:var(--neon)}
           <div class="clock-tile" aria-live="polite">
             <div class="clock-time" id="hero-clock-time">--:--:--</div>
             <div class="clock-date" id="hero-clock-date">Sincronizando fecha…</div>
-            <span class="clock-tz" id="hero-clock-tz">Ritmo personal</span>
+            <span class="clock-tz" id="hero-clock-tz">Zona horaria</span>
           </div>
           <div class="hero-main-body">
-            <h1>Mi cápsula en la nube</h1>
-            <p id="hero-tagline">Todo preparado para seguir mi propio ritmo.</p>
+            <h1>Panel Oliver Cloud</h1>
+            <p id="hero-tagline">Control rápido de WireGuard, sistema y reto.</p>
             <div class="hero-actions">
               <a href="#" class="hero-btn" data-jump-section="wireguard">⚡ Monitor WireGuard</a>
               <a href="#" class="hero-btn" data-jump-section="docker">🚧 Próximo proyecto</a>
@@ -298,74 +259,26 @@ details[open] summary{color:var(--neon)}
           </div>
         </div>
         <div class="hero-side">
-          <div class="hero-highlight">
-            <div class="hero-highlight-title">Radar personal</div>
-            <p id="hero-highlight-text">Todo fluye en silencio. Respira y elige por dónde empezar.</p>
-            <div class="hero-mood" id="hero-mood">Modo actual: <strong id="hero-mood-label">Libre</strong></div>
-            <div class="mood-chips" role="radiogroup" aria-label="Cambiar modo personal">
-              <button type="button" class="mood-chip" role="radio" data-mood="focus">🔒 Foco</button>
-              <button type="button" class="mood-chip" role="radio" data-mood="chill">🌙 Chill</button>
-              <button type="button" class="mood-chip" role="radio" data-mood="hype">🚀 Energía</button>
-              <button type="button" class="mood-chip" role="radio" data-mood="flow">🌊 Flow</button>
-            </div>
-          </div>
-          <div class="ambience-panel">
-            <div class="ambience-header">
-              <div class="ambience-title">Ambiente privado</div>
-              <div class="ambience-summary" id="ambience-summary">Listo para entrar en modo propio.</div>
-            </div>
-            <div class="ambience-slider">
-              <label for="ambience-intensity"><span>Intensidad</span><span id="ambience-intensity-label">Media</span></label>
-              <input type="range" id="ambience-intensity" min="1" max="5" step="1" value="3">
-              <div class="ambience-scale"><span>Suave</span><span>Media</span><span>Alta</span></div>
-            </div>
-            <div class="ambience-toggles">
-              <label class="ambience-toggle">
-                <span>
-                  <strong>Silencio exterior</strong>
-                  <small>Apago los ruidos ajenos y solo escucho lo que me conviene.</small>
-                </span>
-                <input type="checkbox" data-key="silence" checked>
-                <span class="ambience-switch" aria-hidden="true"><span class="dot"></span></span>
-              </label>
-              <label class="ambience-toggle">
-                <span>
-                  <strong>Luces ambientales</strong>
-                  <small>Regulo el brillo para que el espacio acompañe la concentración.</small>
-                </span>
-                <input type="checkbox" data-key="lights" checked>
-                <span class="ambience-switch" aria-hidden="true"><span class="dot"></span></span>
-              </label>
-              <label class="ambience-toggle">
-                <span>
-                  <strong>Alertas críticas</strong>
-                  <small>Solo dejo pasar avisos importantes; todo lo demás espera fuera.</small>
-                </span>
-                <input type="checkbox" data-key="alerts">
-                <span class="ambience-switch" aria-hidden="true"><span class="dot"></span></span>
-              </label>
-            </div>
-          </div>
           <div class="quick-stack">
             <div class="quick-card">
               <div class="quick-card-label">WireGuard</div>
-              <div class="quick-card-value" id="hero-wg-status">En pausa tranquila</div>
-              <div class="quick-card-note" id="hero-wg-note">Cuando quiera revisar, abro la pestaña y listo.</div>
+              <div class="quick-card-value" id="hero-wg-status">Sin comprobar</div>
+              <div class="quick-card-note" id="hero-wg-note">Abre el módulo para ver los peers.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Próximo proyecto</div>
-              <div class="quick-card-value" id="hero-docker-status">Espacio en blanco</div>
-              <div class="quick-card-note" id="hero-docker-note">Un lienzo listo para la próxima locura que se me ocurra.</div>
+              <div class="quick-card-value" id="hero-docker-status">Pendiente</div>
+              <div class="quick-card-note" id="hero-docker-note">Mantén este espacio listo para la tienda.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Sistema</div>
-              <div class="quick-card-value" id="hero-system-status">Todo silencioso</div>
-              <div class="quick-card-note" id="hero-system-note">Si quiero saber más, lanzo el escaneo del sistema.</div>
+              <div class="quick-card-value" id="hero-system-status">Sin datos</div>
+              <div class="quick-card-note" id="hero-system-note">Consulta el panel para refrescar información.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Reto activo</div>
-              <div class="quick-card-value" id="hero-reto-status">Esperando chispa</div>
-              <div class="quick-card-note" id="hero-reto-note">En cuanto trace el plan, la cabina lo guarda para mí.</div>
+              <div class="quick-card-value" id="hero-reto-status">Sin cálculo</div>
+              <div class="quick-card-note" id="hero-reto-note">Genera un plan cuando tengas nuevos datos.</div>
             </div>
           </div>
         </div>
@@ -387,10 +300,15 @@ details[open] summary{color:var(--neon)}
     <!-- PROXIMO PROYECTO -->
     <section id="section-docker" class="panel" style="display:none">
       <h2>Próximo proyecto</h2>
-      <div class="card">
-        <div class="title">🚧 En construcción</div>
-        <div class="value">Aquí aterrizará lo próximo cuando decida darle forma.</div>
-        <div class="quick-card-note">Sin prisas: este hueco espera mis experimentos.</div>
+      <div class="card project-card">
+        <div class="title">Tienda en línea</div>
+        <div class="value">Planificación en curso</div>
+        <ul class="project-list">
+          <li>Definir catálogo inicial y variantes.</li>
+          <li>Preparar pasarela de pago y logística.</li>
+          <li>Configurar campañas de lanzamiento.</li>
+        </ul>
+        <a class="project-link" href="https://olivercloud.es" target="_blank" rel="noopener">Visitar sitio principal</a>
       </div>
     </section>
 
@@ -494,8 +412,6 @@ const heroEls={
   clockTime:document.getElementById('hero-clock-time'),
   clockDate:document.getElementById('hero-clock-date'),
   clockTz:document.getElementById('hero-clock-tz'),
-  tagline:document.getElementById('hero-tagline'),
-  highlight:document.getElementById('hero-highlight-text'),
   cards:{
     wg:{value:document.getElementById('hero-wg-status'),note:document.getElementById('hero-wg-note')},
     docker:{value:document.getElementById('hero-docker-status'),note:document.getElementById('hero-docker-note')},
@@ -503,50 +419,6 @@ const heroEls={
     reto:{value:document.getElementById('hero-reto-status'),note:document.getElementById('hero-reto-note')}
   }
 };
-const moodEls={
-  wrap:document.getElementById('hero-mood'),
-  label:document.getElementById('hero-mood-label'),
-  chips:Array.from(document.querySelectorAll('.mood-chip'))
-};
-const ambienceEls={
-  slider:document.getElementById('ambience-intensity'),
-  sliderLabel:document.getElementById('ambience-intensity-label'),
-  summary:document.getElementById('ambience-summary'),
-  toggles:Array.from(document.querySelectorAll('.ambience-toggle input[type="checkbox"]'))
-};
-
-const HERO_TAGLINES=[
-  'Aquí dentro solo mando yo: calma, foco y buen rollo.',
-  'Nada de prisas. Cuando lo decida, todo responde al instante.',
-  'Un rincón privado para crear, ajustar y disfrutar del proceso.',
-  'Respira, revisa y sigue tu propio ritmo. No hay espectadores.'
-];
-const HERO_HIGHLIGHTS=[
-  'Cada módulo recuerda mis ajustes, incluso si cierro la cabina.',
-  'Si necesito silencio, basta con dejarlo todo en pausa un momento.',
-  'El espacio del próximo proyecto es un lienzo listo para experimentar.',
-  'Mi sistema, mis reglas: puedo cerrar y volver sin perder el hilo.'
-];
-const HERO_MOODS={
-  free:{label:'Libre',extra:''},
-  focus:{label:'Foco activo',extra:'• Prioridad al silencio y a los objetivos.'},
-  chill:{label:'Modo relax',extra:'• Todo va despacio, sin presión externa.'},
-  hype:{label:'Modo energía',extra:'• Energía alta para lanzar ideas sin miedo.'},
-  flow:{label:'Modo flow',extra:'• Las ideas fluyen, solo tengo que seguirlas.'}
-};
-const AMBIENCE_DEFAULT={intensity:3,silence:true,lights:true,alerts:false};
-const AMBIENCE_LABELS={
-  1:'modo reposo',
-  2:'latido suave',
-  3:'ritmo medio',
-  4:'impulso alto',
-  5:'máxima energía'
-};
-let currentMood='free';
-let heroHighlightExtra='';
-let heroHighlightIndex=Math.floor(Math.random()*HERO_HIGHLIGHTS.length);
-let ambienceExtra='';
-let ambienceState={...AMBIENCE_DEFAULT};
 
 function updateNavToggle(expanded){
   if(!navToggle) return;
@@ -598,10 +470,6 @@ document.querySelectorAll('[data-jump-section]').forEach(btn=>{
 });
 
 startHeroClock();
-startHeroTaglines();
-initMoodChips();
-startHeroHighlights();
-initAmbiencePanel();
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'){
     if(currentSection==='wireguard') loadWG();
@@ -621,7 +489,16 @@ function heroNowLabel(){
 }
 function startHeroClock(){
   if(!heroEls.clockTime || !heroEls.clockDate) return;
-  if(heroEls.clockTz) heroEls.clockTz.textContent='Ritmo personal';
+  if(heroEls.clockTz){
+    const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local';
+    const offsetMinutes=new Date().getTimezoneOffset();
+    const offsetTotal=-offsetMinutes;
+    const sign=offsetTotal>=0?'+':'-';
+    const absTotal=Math.abs(offsetTotal);
+    const hours=String(Math.trunc(absTotal/60)).padStart(2,'0');
+    const minutes=String(absTotal%60).padStart(2,'0');
+    heroEls.clockTz.textContent=`${tz} · UTC${sign}${hours}:${minutes}`;
+  }
   const fmtTime=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const fmtDate=new Intl.DateTimeFormat('es-ES',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
   const tick=()=>{
@@ -632,117 +509,6 @@ function startHeroClock(){
   tick();
   setInterval(tick,1000);
 }
-function startHeroTaglines(){
-  if(!heroEls.tagline || !HERO_TAGLINES.length) return;
-  let idx=Math.floor(Math.random()*HERO_TAGLINES.length);
-  const rotate=()=>{
-    heroEls.tagline.textContent=HERO_TAGLINES[idx];
-    idx=(idx+1)%HERO_TAGLINES.length;
-  };
-  rotate();
-  setInterval(rotate,8000);
-}
-function applyHeroHighlight(advance){
-  if(!heroEls.highlight || !HERO_HIGHLIGHTS.length) return;
-  const base=HERO_HIGHLIGHTS[heroHighlightIndex % HERO_HIGHLIGHTS.length];
-  const extras=[heroHighlightExtra,ambienceExtra].filter(Boolean).join(' ');
-  heroEls.highlight.textContent=extras?`${base} ${extras}`:base;
-  if(advance){
-    heroHighlightIndex=(heroHighlightIndex+1)%HERO_HIGHLIGHTS.length;
-  }
-}
-function startHeroHighlights(){
-  if(!heroEls.highlight || !HERO_HIGHLIGHTS.length) return;
-  applyHeroHighlight(true);
-  setInterval(()=>applyHeroHighlight(true),9000);
-}
-function setMood(mood){
-  const target=HERO_MOODS[mood]?mood:'free';
-  const info=HERO_MOODS[target];
-  currentMood=target;
-  heroHighlightExtra=info.extra;
-  if(moodEls.label) moodEls.label.textContent=info.label;
-  if(moodEls.chips.length){
-    moodEls.chips.forEach(chip=>{
-      const active=target!=='free' && chip.dataset.mood===target;
-      chip.classList.toggle('active',active);
-      chip.setAttribute('aria-checked',active?'true':'false');
-    });
-  }
-  applyHeroHighlight(false);
-  try{localStorage.setItem('oc_mood',target);}catch{}
-}
-function initMoodChips(){
-  if(!moodEls.chips.length) return;
-  moodEls.chips.forEach(chip=>{
-    chip.setAttribute('aria-checked','false');
-    chip.addEventListener('click',()=>{
-      const mood=chip.dataset.mood;
-      const next=currentMood===mood?'free':mood;
-      setMood(next);
-    });
-  });
-  let saved='free';
-  try{
-    const stored=localStorage.getItem('oc_mood');
-    if(stored && HERO_MOODS[stored]) saved=stored;
-  }catch{}
-  setMood(saved);
-}
-function clampAmbienceIntensity(value){
-  const num=parseInt(value,10);
-  if(Number.isNaN(num)) return AMBIENCE_DEFAULT.intensity;
-  return Math.min(5,Math.max(1,num));
-}
-function persistAmbience(){
-  try{localStorage.setItem('oc_ambience',JSON.stringify(ambienceState));}catch{}
-}
-function updateAmbienceSummary(opts={}){
-  ambienceState.intensity=clampAmbienceIntensity(ambienceState.intensity);
-  const label=AMBIENCE_LABELS[ambienceState.intensity]||AMBIENCE_LABELS[AMBIENCE_DEFAULT.intensity];
-  const prettyLabel=label.charAt(0).toUpperCase()+label.slice(1);
-  if(ambienceEls.sliderLabel) ambienceEls.sliderLabel.textContent=prettyLabel;
-  const details=[
-    ambienceState.silence?'Silencio exterior activado':'Canales sonoros abiertos',
-    ambienceState.lights?'Luces en modo ambiente':'Luz directa lista para acción',
-    ambienceState.alerts?'Alertas críticas vigiladas':'Alertas en espera tranquila'
-  ];
-  const summary=`${prettyLabel}. ${details.join(' · ')}.`;
-  if(ambienceEls.summary) ambienceEls.summary.textContent=summary;
-  ambienceExtra=`Ambiente ${label} con ${ambienceState.silence?'silencio exterior':'canales abiertos'} y ${ambienceState.alerts?'alertas críticas activas':'alertas en pausa controlada'}.`;
-  if(opts.save) persistAmbience();
-  applyHeroHighlight(false);
-}
-function initAmbiencePanel(){
-  if(!ambienceEls.slider && !ambienceEls.toggles.length) return;
-  try{
-    const stored=JSON.parse(localStorage.getItem('oc_ambience')||'{}');
-    if(stored && typeof stored==='object'){
-      ambienceState={...ambienceState,...stored};
-    }
-  }catch{}
-  ambienceState.intensity=clampAmbienceIntensity(ambienceState.intensity);
-  ['silence','lights','alerts'].forEach(key=>{
-    if(typeof ambienceState[key]!=='boolean') ambienceState[key]=AMBIENCE_DEFAULT[key];
-  });
-  if(ambienceEls.slider){
-    ambienceEls.slider.value=String(ambienceState.intensity);
-    ambienceEls.slider.addEventListener('input',()=>{
-      ambienceState.intensity=clampAmbienceIntensity(ambienceEls.slider.value);
-      updateAmbienceSummary({save:true});
-    });
-  }
-  ambienceEls.toggles.forEach(input=>{
-    const key=input.dataset.key;
-    if(!key) return;
-    input.checked=!!ambienceState[key];
-    input.addEventListener('change',()=>{
-      ambienceState[key]=input.checked;
-      updateAmbienceSummary({save:true});
-    });
-  });
-  updateAmbienceSummary();
-}
 
 /* ====== WireGuard ====== */
 async function loadWG(){
@@ -752,14 +518,14 @@ async function loadWG(){
   s.textContent='Estado: comprobando...';
   sm.textContent='Cargando...';
   peersBox.innerHTML='';
-  heroSetCard('wg','Sintonizando…','Abriendo mi monitor privado de WireGuard.');
+  heroSetCard('wg','Comprobando…','Cargando estado actual.');
   try{
     const res=await fetch('https://api.olivercloud.es/api/wg/status',{cache:'no-store'});
     const d=await res.json();
     if(!d || d.status!=='ok' || !d.running){
       s.textContent='🔴 Inactivo';
       sm.textContent=d?.message||'WireGuard no disponible';
-      heroSetCard('wg','🔴 Inactivo', d?.message ? d.message : 'Por ahora queda en silencio.');
+      heroSetCard('wg','🔴 Inactivo', d?.message ? d.message : 'No hay túneles activos.');
       return;
     }
     s.innerHTML='<span style="color:#22c55e">🟢 Activo</span>';
@@ -782,20 +548,20 @@ async function loadWG(){
     }
   }catch(e){
     s.textContent='⚠️ Error'; sm.textContent='No se pudo conectar con la API';
-    heroSetCard('wg','⚠️ Error','No pasa nada, lo intento de nuevo en un rato.');
+    heroSetCard('wg','⚠️ Error','Reintenta en unos segundos.');
   }
 }
 
 /* ====== Docker ====== */
 function loadDocker(){
-  heroSetCard('docker','🧪 En laboratorio','Lo adapto en cuanto la próxima idea tome forma.');
+  heroSetCard('docker','En preparación','Revisa la hoja de ruta en el módulo.');
 }
 
 /* ====== Sistema ====== */
 async function loadSystem(){
   const E=(id)=>document.getElementById(id);
   const set=(id,v)=>E(id).textContent=v;
-  heroSetCard('system','Afinando…','Recogiendo datos confidenciales.');
+  heroSetCard('system','Actualizando…','Consultando el estado del servidor.');
   try{
     const res=await fetch('https://api.olivercloud.es/api/system/status',{cache:'no-store'});
     const d=await res.json();
@@ -830,7 +596,7 @@ async function loadSystem(){
     set('s-hostname','Error'); set('s-os','Error'); set('s-uptime','Error');
     set('s-cpu','N/A'); set('s-ram','N/A'); set('s-disk','N/A'); set('s-temp','N/A'); set('s-docker','N/A'); set('s-ip','N/A');
     E('s-docker-tip').textContent='No se pudo obtener info';
-    heroSetCard('system','⚠️ Error','Respiro un momento y vuelvo a intentarlo.');
+    heroSetCard('system','⚠️ Error','Revisa la conexión y vuelve a intentarlo.');
   }
 }
 
