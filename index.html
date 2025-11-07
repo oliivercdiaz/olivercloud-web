@@ -17,6 +17,131 @@ body{
   color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 
+/* === ERICA CELEBRATION === */
+.erica-panel{display:flex;flex-direction:column;gap:22px}
+.erica-intro{
+  background:linear-gradient(180deg,rgba(0,255,242,0.08),rgba(5,12,20,0.92));
+  border:1px solid rgba(45,212,191,0.25);
+  border-radius:14px;
+  padding:26px 28px;
+  box-shadow:0 0 28px rgba(0,255,242,0.18);
+}
+.erica-intro h2{margin:0 0 10px;font-size:1.8rem;color:#80f7f0;text-shadow:0 0 12px rgba(0,255,242,0.6)}
+.erica-intro p{margin:0;color:#d7e9e7;line-height:1.6;font-size:1rem}
+.erica-milestones{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.erica-milestone{
+  background:rgba(12,18,26,0.92);
+  border:1px solid rgba(128,247,240,0.25);
+  border-radius:12px;
+  padding:18px;
+  position:relative;
+  overflow:hidden;
+}
+.erica-milestone::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(128,247,240,0.18),transparent);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.erica-milestone:hover::after{opacity:1}
+.erica-milestone h3{margin:0 0 8px;color:#2dd4bf;font-size:1.05rem}
+.erica-milestone p{margin:0;color:#b7dedd;line-height:1.55;font-size:0.95rem}
+.erica-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.erica-list{margin:12px 0 0;padding-left:18px;line-height:1.6;color:#cfe7e5;font-size:0.95rem}
+.erica-quote{
+  margin-top:18px;
+  background:rgba(0,255,242,0.08);
+  border-left:3px solid #80f7f0;
+  padding:14px 18px;
+  border-radius:10px;
+  color:#e9fffd;
+  font-size:0.95rem;
+  line-height:1.6;
+}
+.erica-puzzle{
+  background:rgba(10,14,22,0.92);
+  border:1px solid rgba(128,247,240,0.25);
+  border-radius:12px;
+  box-shadow:0 0 30px rgba(0,255,242,0.16);
+  padding:24px;
+}
+.erica-step{margin-top:18px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(45,212,191,0.18)}
+.erica-step.solved{border-color:rgba(128,247,240,0.45);box-shadow:0 0 20px rgba(128,247,240,0.25)}
+.erica-question{margin:0;color:#d1f5f2;font-size:1rem}
+.erica-options{margin-top:12px;display:grid;gap:10px}
+.erica-option{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:10px;
+  background:rgba(9,15,24,0.92);
+  border:1px solid rgba(128,247,240,0.18);
+  color:#e5fdfb;
+  font-size:0.95rem;
+  text-align:left;
+  cursor:pointer;
+  transition:transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.erica-option:hover{transform:translateY(-1px);border-color:rgba(128,247,240,0.45)}
+.erica-option.correct{background:rgba(20,184,166,0.22);border-color:rgba(128,247,240,0.6);box-shadow:0 0 18px rgba(0,255,242,0.22)}
+.erica-option.disabled{opacity:0.45;cursor:default}
+.erica-option.shake{animation:ericaShake .45s}
+.erica-progress{margin-top:22px;display:flex;gap:12px;align-items:center}
+.erica-letter{
+  width:42px;height:42px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(128,247,240,0.25);
+  font-size:1.2rem;color:#80f7f0;background:rgba(8,14,20,0.92);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.erica-letter.filled{box-shadow:0 0 16px rgba(0,255,242,0.25);transform:translateY(-2px)}
+.erica-input{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
+.erica-input input{
+  flex:1 1 220px;
+  background:rgba(8,14,20,0.9);
+  border:1px solid rgba(128,247,240,0.35);
+  border-radius:10px;
+  padding:10px 12px;
+  color:#e5fdfb;
+  font-size:1rem;
+}
+.erica-input button{
+  flex:0 0 auto;
+  background:linear-gradient(120deg,rgba(0,255,242,0.92),rgba(20,184,166,0.88));
+  color:#001214;
+  border-radius:10px;
+  padding:10px 18px;
+}
+.erica-feedback{margin-top:12px;color:#9fb1b0;font-size:0.95rem;min-height:20px}
+.erica-feedback.success{color:#80f7f0;text-shadow:0 0 10px rgba(128,247,240,0.5)}
+.erica-surprise{
+  margin-top:18px;
+  display:none;
+  padding:18px;
+  border-radius:12px;
+  background:rgba(12,20,30,0.9);
+  border:1px solid rgba(128,247,240,0.35);
+  box-shadow:0 0 22px rgba(0,255,242,0.22);
+  color:#e8fffe;
+  line-height:1.7;
+}
+.erica-surprise.show{display:block;animation:ericaGlow 1.2s ease forwards}
+
+@keyframes ericaGlow{
+  0%{opacity:0;transform:translateY(8px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+@keyframes ericaShake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-3px)}
+}
+
 /* === NAV === */
 header{
   position:fixed;left:50%;top:14px;transform:translateX(-50%);
@@ -231,6 +356,7 @@ details[open] summary{color:var(--neon)}
     <a href="#" class="nav-link active" data-section="home">Inicio</a>
     <a href="#" class="nav-link" data-section="wireguard">WireGuard</a>
     <a href="#" class="nav-link" data-section="docker">Próximo proyecto</a>
+    <a href="#" class="nav-link" data-section="erica">Erica</a>
     <a href="#" class="nav-link" data-section="reto">Reto</a>
     <a href="#" class="nav-link" data-section="system">Sistema</a>
   </nav>
@@ -253,6 +379,7 @@ details[open] summary{color:var(--neon)}
             <div class="hero-actions">
               <a href="#" class="hero-btn" data-jump-section="wireguard">⚡ Monitor WireGuard</a>
               <a href="#" class="hero-btn" data-jump-section="docker">🚧 Próximo proyecto</a>
+              <a href="#" class="hero-btn" data-jump-section="erica">💖 Celebrate Erica</a>
               <a href="#" class="hero-btn" data-jump-section="reto">🎯 Abrir reto</a>
               <a href="#" class="hero-btn ghost" data-jump-section="system">🛠️ Estado del sistema</a>
             </div>
@@ -274,6 +401,11 @@ details[open] summary{color:var(--neon)}
               <div class="quick-card-label">Próximo proyecto</div>
               <div class="quick-card-value" id="hero-docker-status">Espacio reservado</div>
               <div class="quick-card-note" id="hero-docker-note">Personaliza esta pestaña cuando definas el módulo.</div>
+            </div>
+            <div class="quick-card">
+              <div class="quick-card-label">Erica</div>
+              <div class="quick-card-value" id="hero-erica-status">💖 First month celebration</div>
+              <div class="quick-card-note" id="hero-erica-note">Open the Erica tab to unlock a secret love quest.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Sistema</div>
@@ -309,6 +441,101 @@ details[open] summary{color:var(--neon)}
         <div class="title">🚧 En construcción</div>
         <div class="value">Aquí irá el siguiente proyecto cuando definas la integración.</div>
         <div class="quick-card-note">Prepara tus APIs con calma; este espacio ya está listo para adaptarse.</div>
+      </div>
+    </section>
+
+    <!-- ERICA CELEBRATION -->
+    <section id="section-erica" class="panel erica-panel" style="display:none">
+      <div class="erica-intro">
+        <h2>Celebrating Erica</h2>
+        <p>
+          Happy first official month, my love. This space is for the little sparks we have shared,
+          the promises we are making, and the laughter that keeps glowing even when the lights are low.
+        </p>
+        <div class="erica-milestones">
+          <div class="erica-milestone">
+            <h3>Day 1 – We said yes</h3>
+            <p>The moment our story turned official, every playlist sounded sweeter.</p>
+          </div>
+          <div class="erica-milestone">
+            <h3>Week 2 – Cozy adventures</h3>
+            <p>From shared series to midnight snacks, our routine started to feel like home.</p>
+          </div>
+          <div class="erica-milestone">
+            <h3>Week 4 – Love on repeat</h3>
+            <p>We found ourselves finishing each other’s sentences and planning the next chapter.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="erica-card-grid">
+        <div class="card erica-card">
+          <div class="title">Why you are my favorite person</div>
+          <ul class="erica-list">
+            <li>Your smile resets my whole day in one heartbeat.</li>
+            <li>You turn ordinary plans into legendary memories.</li>
+            <li>The way you listen makes me feel truly seen.</li>
+            <li>We are a team — playful, brave, unstoppable.</li>
+          </ul>
+          <div class="erica-quote">“Every day with you feels like a new constellation lighting up our sky.”</div>
+        </div>
+        <div class="card erica-card">
+          <div class="title">Month one mood board</div>
+          <p>
+            Candle-lit chats, inside jokes on loop, and hugs that outshine the city lights.
+            Keep this vibe as our baseline and let’s see how bright month two can get.
+          </p>
+          <p style="margin-top:12px;color:#9fb1b0;font-size:0.95rem">
+            Playlist starter: “Electric Love” – BØRNS · “Golden Hour” – JVKE · “Sunroof” – Nicky Youre.
+          </p>
+        </div>
+      </div>
+
+      <div class="card erica-puzzle" id="erica-puzzle">
+        <div class="title">Love Quest Puzzle</div>
+        <p>Answer each clue to collect three glowing letters. The final letter is the one you whisper the most — put them together to reveal the secret word and unlock a surprise note.</p>
+
+        <div class="erica-step" data-slot="1">
+          <p class="erica-question">Clue 1 · Which memory from this month felt the most “us”?</p>
+          <div class="erica-options">
+            <button type="button" class="erica-option" data-correct="true" data-letter="L">Listening to your laugh until midnight.</button>
+            <button type="button" class="erica-option">Climbing a random volcano at dawn.</button>
+          </div>
+        </div>
+
+        <div class="erica-step" data-slot="2">
+          <p class="erica-question">Clue 2 · Choose the word that describes our rhythm.</p>
+          <div class="erica-options">
+            <button type="button" class="erica-option">Chaotic</button>
+            <button type="button" class="erica-option" data-correct="true" data-letter="O">Organic</button>
+          </div>
+        </div>
+
+        <div class="erica-step" data-slot="3">
+          <p class="erica-question">Clue 3 · Pick the promise that we keep repeating.</p>
+          <div class="erica-options">
+            <button type="button" class="erica-option" data-correct="true" data-letter="V">Vowing to choose each other every single day.</button>
+            <button type="button" class="erica-option">Competing on who replies slower.</button>
+          </div>
+        </div>
+
+        <div class="erica-progress" aria-live="polite">
+          <span class="erica-letter" data-slot="1">•</span>
+          <span class="erica-letter" data-slot="2">•</span>
+          <span class="erica-letter" data-slot="3">•</span>
+        </div>
+
+        <div class="erica-input">
+          <input id="erica-answer" type="text" placeholder="Type the secret word" aria-label="Type the secret word">
+          <button type="button" id="erica-check">Unlock message</button>
+        </div>
+        <p id="erica-feedback" class="erica-feedback" role="status"></p>
+        <div id="erica-surprise" class="erica-surprise">
+          <p>
+            Surprise unlocked! Erica, you are my safe place and my favorite adventure. Here’s to month one,
+            and to every sunrise, playlist, and kiss that waits for us next.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -403,6 +630,7 @@ const sections={
   home:document.getElementById('section-home'),
   wireguard:document.getElementById('section-wireguard'),
   docker:document.getElementById('section-docker'),
+  erica:document.getElementById('section-erica'),
   reto:document.getElementById('section-reto'),
   system:document.getElementById('section-system')
 };
@@ -417,10 +645,21 @@ const heroEls={
   cards:{
     wg:{value:document.getElementById('hero-wg-status'),note:document.getElementById('hero-wg-note')},
     docker:{value:document.getElementById('hero-docker-status'),note:document.getElementById('hero-docker-note')},
+    erica:{value:document.getElementById('hero-erica-status'),note:document.getElementById('hero-erica-note')},
     system:{value:document.getElementById('hero-system-status'),note:document.getElementById('hero-system-note')},
     reto:{value:document.getElementById('hero-reto-status'),note:document.getElementById('hero-reto-note')}
   }
 };
+
+const ericaGame={
+  steps:Array.from(document.querySelectorAll('.erica-step')),
+  letters:Array.from(document.querySelectorAll('.erica-letter')),
+  answer:document.getElementById('erica-answer'),
+  check:document.getElementById('erica-check'),
+  feedback:document.getElementById('erica-feedback'),
+  surprise:document.getElementById('erica-surprise')
+};
+const ericaState={letters:['','',''],solved:false,initialized:false};
 
 const HERO_TAGLINES=[
   'Control total de redes, apuestas y sistema desde una sola cabina.',
@@ -432,7 +671,8 @@ const HERO_HIGHLIGHTS=[
   'Tip: guarda tu plan del reto y volverá exactamente donde lo dejaste.',
   'Recuerda revisar los peers activos de WireGuard tras cada despliegue.',
   'Reserva la pestaña “Próximo proyecto” para tu siguiente idea grande.',
-  '¿Necesitas foco? Cierra el menú con el botón hamburguesa en móviles.'
+  '¿Necesitas foco? Cierra el menú con el botón hamburguesa en móviles.',
+  'Celebrate your first month in the Erica tab and unlock the love quest.'
 ];
 
 function updateNavToggle(expanded){
@@ -462,6 +702,7 @@ function switchSection(section){
   if(section==='wireguard') loadWG();
   if(section==='docker') loadDocker();
   if(section==='system') loadSystem();
+  if(section==='erica') ericaEnterSection();
   if(navToggle && navBar){
     navBar.classList.remove('open');
     updateNavToggle(false);
@@ -484,6 +725,7 @@ document.querySelectorAll('[data-jump-section]').forEach(btn=>{
   });
 });
 
+initEricaCelebration();
 startHeroClock();
 startHeroTaglines();
 startHeroHighlights();
@@ -500,6 +742,95 @@ function heroSetCard(key,status,note){
   if(!card) return;
   if(card.value && typeof status==='string') card.value.textContent=status;
   if(card.note && typeof note==='string') card.note.textContent=note;
+}
+function ericaUpdateLetters(){
+  if(!ericaGame.letters.length) return;
+  ericaGame.letters.forEach((span,idx)=>{
+    const letter=ericaState.letters[idx]||'';
+    span.textContent=letter||'•';
+    span.classList.toggle('filled',Boolean(letter));
+  });
+}
+function ericaShowFeedback(message,success=false){
+  if(!ericaGame.feedback) return;
+  ericaGame.feedback.textContent=message;
+  ericaGame.feedback.classList.toggle('success',Boolean(success));
+}
+function ericaRevealLetter(slotIndex,letter){
+  if(slotIndex<0 || slotIndex>=ericaState.letters.length) return;
+  if(ericaState.letters[slotIndex]) return;
+  ericaState.letters[slotIndex]=letter||'';
+  ericaUpdateLetters();
+  if(!letter) return;
+  if(ericaState.letters.every(Boolean) && !ericaState.solved){
+    ericaShowFeedback('Letters gathered! Type the secret word to unlock our note.',true);
+  }else{
+    ericaShowFeedback(`Great choice! Letter "${letter}" unlocked.`,true);
+  }
+}
+function ericaEnterSection(){
+  if(!ericaState.initialized) initEricaCelebration();
+  if(!ericaState.solved) heroSetCard('erica','💖 In progress','Enjoy the love quest together!');
+  if(ericaGame.answer && !ericaGame.answer.disabled){
+    setTimeout(()=>{ if(document.activeElement!==ericaGame.answer) ericaGame.answer.focus(); },220);
+  }
+}
+function initEricaCelebration(){
+  if(ericaState.initialized) return;
+  ericaState.initialized=true;
+  heroSetCard('erica','💖 Love quest ready','Solve the Erica puzzle to reveal the note.');
+  ericaUpdateLetters();
+  ericaGame.steps.forEach(step=>{
+    const slotIndex=Math.max(0,Math.min(ericaState.letters.length-1,(parseInt(step.dataset.slot,10)||0)-1));
+    const options=step.querySelectorAll('.erica-option');
+    options.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        if(step.classList.contains('solved')) return;
+        const isCorrect=btn.dataset.correct==='true';
+        if(isCorrect){
+          step.classList.add('solved');
+          btn.classList.add('correct');
+          options.forEach(opt=>{opt.disabled=true;if(opt!==btn) opt.classList.add('disabled');});
+          const letter=btn.dataset.letter||'';
+          ericaRevealLetter(slotIndex,letter);
+        }else{
+          btn.classList.add('shake');
+          setTimeout(()=>btn.classList.remove('shake'),420);
+          ericaShowFeedback('Almost! Pick the option that feels like us.',false);
+        }
+      });
+    });
+  });
+  if(ericaGame.check){
+    ericaGame.check.addEventListener('click',ericaCheckAnswer);
+  }
+  if(ericaGame.answer){
+    ericaGame.answer.addEventListener('keydown',ev=>{
+      if(ev.key==='Enter'){
+        ev.preventDefault();
+        ericaCheckAnswer();
+      }
+    });
+  }
+}
+function ericaCheckAnswer(){
+  if(!ericaGame.answer) return;
+  if(!ericaState.letters.every(Boolean)){
+    ericaShowFeedback('Collect every glowing letter first — each clue hides one.',false);
+    return;
+  }
+  const guess=(ericaGame.answer.value||'').trim().toUpperCase();
+  if(guess==='LOVE'){
+    ericaState.solved=true;
+    ericaShowFeedback('Unlocked! Happy first official month, my love. 💖',true);
+    heroSetCard('erica','💘 Puzzle solved','Secret love note opened.');
+    ericaGame.answer.value='LOVE';
+    if(ericaGame.surprise) ericaGame.surprise.classList.add('show');
+    if(ericaGame.answer) ericaGame.answer.disabled=true;
+    if(ericaGame.check) ericaGame.check.disabled=true;
+  }else{
+    ericaShowFeedback('The secret word is the feeling that started it all. Try again!',false);
+  }
 }
 function heroNowLabel(){
   return new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date());
