@@ -17,168 +17,6 @@ body{
   color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 
-/* === ERICA CELEBRATION === */
-.erica-panel{display:flex;flex-direction:column;gap:22px}
-.erica-intro{
-  background:linear-gradient(180deg,rgba(0,255,242,0.08),rgba(5,12,20,0.92));
-  border:1px solid rgba(45,212,191,0.25);
-  border-radius:14px;
-  padding:26px 28px;
-  box-shadow:0 0 28px rgba(0,255,242,0.18);
-}
-.erica-intro h2{margin:0 0 10px;font-size:1.8rem;color:#80f7f0;text-shadow:0 0 12px rgba(0,255,242,0.6)}
-.erica-intro p{margin:0;color:#d7e9e7;line-height:1.6;font-size:1rem}
-.erica-milestones{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.erica-milestone{
-  background:rgba(12,18,26,0.92);
-  border:1px solid rgba(128,247,240,0.25);
-  border-radius:12px;
-  padding:18px;
-  position:relative;
-  overflow:hidden;
-}
-.erica-milestone::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,rgba(128,247,240,0.18),transparent);
-  opacity:0;
-  transition:opacity .3s ease;
-}
-.erica-milestone:hover::after{opacity:1}
-.erica-milestone h3{margin:0 0 8px;color:#2dd4bf;font-size:1.05rem}
-.erica-milestone p{margin:0;color:#b7dedd;line-height:1.55;font-size:0.95rem}
-.erica-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.erica-list{margin:12px 0 0;padding-left:18px;line-height:1.6;color:#cfe7e5;font-size:0.95rem}
-.erica-note{margin-top:12px;color:#9fb1b0;font-size:0.92rem;line-height:1.5}
-.erica-quote{
-  margin-top:18px;
-  background:rgba(0,255,242,0.08);
-  border-left:3px solid #80f7f0;
-  padding:14px 18px;
-  border-radius:10px;
-  color:#e9fffd;
-  font-size:0.95rem;
-  line-height:1.6;
-}
-.erica-audio-card{
-  background:rgba(10,14,22,0.92);
-  border:1px solid rgba(128,247,240,0.25);
-  border-radius:12px;
-  box-shadow:0 0 30px rgba(0,255,242,0.16);
-  padding:24px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-.erica-audio-card audio{width:100%;background:rgba(8,14,20,0.8);border-radius:10px}
-.erica-audio-card iframe{width:100%;border:0;border-radius:12px;height:200px}
-.erica-audio-actions{display:flex;flex-wrap:wrap;gap:10px}
-.erica-audio-actions button,.erica-audio-actions a{
-  padding:10px 16px;
-  border-radius:10px;
-  border:1px solid rgba(128,247,240,0.35);
-  background:rgba(8,14,20,0.7);
-  color:#e5fdfb;
-  text-decoration:none;
-  cursor:pointer;
-  transition:transform .15s ease, border-color .15s ease;
-}
-.erica-audio-actions button:hover,.erica-audio-actions a:hover{transform:translateY(-1px);border-color:rgba(128,247,240,0.55)}
-.erica-door{
-  background:rgba(10,16,24,0.92);
-  border:1px solid rgba(128,247,240,0.25);
-  border-radius:12px;
-  padding:24px;
-  position:relative;
-  overflow:hidden;
-}
-.erica-door::after{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background:radial-gradient(circle,rgba(0,255,242,0.12),transparent 60%);
-  opacity:0;
-  transition:opacity .4s ease;
-}
-.erica-door:hover::after{opacity:1}
-.erica-door-button{
-  margin-top:16px;
-  padding:12px 18px;
-  border-radius:12px;
-  border:1px solid rgba(128,247,240,0.4);
-  background:linear-gradient(120deg,rgba(0,255,242,0.88),rgba(20,184,166,0.8));
-  color:#001214;
-  font-weight:600;
-  cursor:pointer;
-  transition:transform .2s ease;
-}
-.erica-door-button:hover{transform:translateY(-2px)}
-.erica-gallery-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(2,6,14,0.88);
-  backdrop-filter:blur(6px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:40px 20px;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .3s ease;
-  z-index:120;
-}
-.erica-gallery-overlay.show{opacity:1;pointer-events:all}
-.erica-gallery{
-  width:min(960px,100%);
-  background:rgba(8,12,20,0.95);
-  border:1px solid rgba(128,247,240,0.35);
-  border-radius:16px;
-  padding:28px;
-  box-shadow:0 0 40px rgba(0,255,242,0.24);
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-.erica-gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;
-}
-.erica-gallery figure{margin:0;background:rgba(255,255,255,0.03);border:1px solid rgba(128,247,240,0.18);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
-.erica-gallery img{width:100%;height:180px;object-fit:cover;border-radius:8px;background:#0f172a}
-.erica-gallery figcaption{color:#9fb1b0;font-size:0.9rem;line-height:1.4}
-.erica-gallery-close{align-self:flex-end;padding:8px 14px;border-radius:10px;border:1px solid rgba(128,247,240,0.45);background:rgba(0,255,242,0.15);color:#e5fdfb;cursor:pointer}
-.rubik-card{
-  background:rgba(10,14,22,0.92);
-  border:1px solid rgba(128,247,240,0.25);
-  border-radius:12px;
-  box-shadow:0 0 30px rgba(0,255,242,0.16);
-  padding:24px;
-  display:grid;
-  gap:18px;
-}
-.rubik-grid{display:grid;grid-template-columns:repeat(3,80px);gap:10px;justify-content:center;margin:0 auto}
-.rubik-tile{width:80px;height:80px;border-radius:12px;box-shadow:0 0 12px rgba(0,0,0,0.35);border:2px solid rgba(5,7,13,0.65)}
-.rubik-controls{display:grid;gap:10px;justify-content:center}
-.rubik-controls-row{display:flex;gap:10px;justify-content:center}
-.rubik-controls button{
-  padding:8px 12px;
-  border-radius:10px;
-  border:1px solid rgba(128,247,240,0.35);
-  background:rgba(8,14,20,0.7);
-  color:#e5fdfb;
-  cursor:pointer;
-  transition:transform .15s ease, border-color .15s ease;
-}
-.rubik-controls button:hover{transform:translateY(-1px);border-color:rgba(128,247,240,0.55)}
-.rubik-message{color:#9fb1b0;font-size:0.95rem;text-align:center}
-
-@keyframes ericaGlow{
-  0%{opacity:0;transform:translateY(8px)}
-  100%{opacity:1;transform:translateY(0)}
-}
-
 /* === NAV === */
 header{
   position:fixed;left:50%;top:14px;transform:translateX(-50%);
@@ -224,7 +62,7 @@ main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:cen
 }
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:30px;align-items:stretch}
 .hero-main{display:grid;grid-template-rows:auto 1fr;gap:26px}
-.hero-side{display:flex;flex-direction:column;gap:18px}
+.hero-side{display:flex;flex-direction:column;gap:18px;justify-content:flex-start}
 .clock-tile{
   position:relative;overflow:hidden;border-radius:14px;padding:26px;
   border:1px solid rgba(45,212,191,0.2);
@@ -257,15 +95,7 @@ main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:cen
   background:rgba(12,16,20,0.9);color:var(--neon);border:1px solid rgba(45,212,191,0.45);
   box-shadow:none;
 }
-.hero-highlight{
-  position:relative;border-radius:14px;padding:20px 20px 22px;background:rgba(8,12,16,0.85);
-  border:1px solid rgba(45,212,191,0.18);box-shadow:0 20px 35px rgba(0,0,0,0.35);
-}
-.hero-highlight-title{color:#80f7f0;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
-.hero-highlight p{margin:0;color:#d7e9e7;font-size:0.95rem;line-height:1.6}
-.pulse-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);
-  position:absolute;top:18px;right:20px;animation:pulse 1.8s ease-in-out infinite}
-.quick-stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:18px}
+.quick-stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:0}
 .quick-card{
   border-radius:12px;padding:16px 18px;background:rgba(12,16,20,0.88);
   border:1px solid rgba(45,212,191,0.12);box-shadow:0 18px 28px rgba(0,0,0,0.35);
@@ -273,16 +103,24 @@ main{padding-top:calc(var(--nav-height) + 24px);display:flex;justify-content:cen
 .quick-card-label{font-size:0.8rem;color:#6bded8;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px}
 .quick-card-value{color:#e9fffd;font-size:1.05rem;font-weight:600}
 .quick-card-note{color:#99bebb;font-size:0.85rem;margin-top:4px}
+.project-card{display:flex;flex-direction:column;gap:12px}
+.project-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:0.9rem;color:#b9d5d3}
+.project-list li{display:flex;align-items:center;gap:8px}
+.project-list li::before{content:'•';color:var(--neon)}
+.project-link{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:6px;padding:10px 16px;border-radius:999px;font-weight:bold;
+  text-decoration:none;color:#001214;background:linear-gradient(90deg,var(--neon),var(--accent));
+  box-shadow:0 0 18px rgba(0,255,242,0.28);
+  transition:transform .14s,box-shadow .14s;
+}
+.project-link:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(0,255,242,0.22)}
 
 @keyframes clockSweep{
   0%{opacity:0;transform:translateX(-40%)}
   25%{opacity:0.55}
   50%{opacity:0.2}
   100%{opacity:0;transform:translateX(40%)}
-}
-@keyframes pulse{
-  0%,100%{opacity:0.35;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.3)}
 }
 
 /* === CARDS / GRID === */
@@ -393,7 +231,6 @@ details[open] summary{color:var(--neon)}
     <a href="#" class="nav-link active" data-section="home">Inicio</a>
     <a href="#" class="nav-link" data-section="wireguard">WireGuard</a>
     <a href="#" class="nav-link" data-section="docker">Próximo proyecto</a>
-    <a href="#" class="nav-link" data-section="erica">Erica</a>
     <a href="#" class="nav-link" data-section="reto">Reto</a>
     <a href="#" class="nav-link" data-section="system">Sistema</a>
   </nav>
@@ -408,51 +245,40 @@ details[open] summary{color:var(--neon)}
           <div class="clock-tile" aria-live="polite">
             <div class="clock-time" id="hero-clock-time">--:--:--</div>
             <div class="clock-date" id="hero-clock-date">Sincronizando fecha…</div>
-            <span class="clock-tz" id="hero-clock-tz">Zona horaria local</span>
+            <span class="clock-tz" id="hero-clock-tz">Zona horaria</span>
           </div>
           <div class="hero-main-body">
-            <h1>Centro de mando de Oliver</h1>
-            <p id="hero-tagline">Panel principal en espera de instrucciones.</p>
+            <h1>Panel Oliver Cloud</h1>
+            <p id="hero-tagline">Control rápido de WireGuard, sistema y reto.</p>
             <div class="hero-actions">
               <a href="#" class="hero-btn" data-jump-section="wireguard">⚡ Monitor WireGuard</a>
               <a href="#" class="hero-btn" data-jump-section="docker">🚧 Próximo proyecto</a>
-              <a href="#" class="hero-btn" data-jump-section="erica">💖 Oliver &amp; Erica</a>
               <a href="#" class="hero-btn" data-jump-section="reto">🎯 Abrir reto</a>
               <a href="#" class="hero-btn ghost" data-jump-section="system">🛠️ Estado del sistema</a>
             </div>
           </div>
         </div>
         <div class="hero-side">
-          <div class="hero-highlight">
-            <span class="pulse-dot" aria-hidden="true"></span>
-            <div class="hero-highlight-title">Pulso en directo</div>
-            <p id="hero-highlight-text">Todo listo para despegar. Usa las tarjetas para empezar.</p>
-          </div>
           <div class="quick-stack">
             <div class="quick-card">
               <div class="quick-card-label">WireGuard</div>
-              <div class="quick-card-value" id="hero-wg-status">Pendiente de actualizar</div>
-              <div class="quick-card-note" id="hero-wg-note">Toca el monitor para consultar la API.</div>
+              <div class="quick-card-value" id="hero-wg-status">Sin comprobar</div>
+              <div class="quick-card-note" id="hero-wg-note">Abre el módulo para ver los peers.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Próximo proyecto</div>
-              <div class="quick-card-value" id="hero-docker-status">Espacio reservado</div>
-              <div class="quick-card-note" id="hero-docker-note">Personaliza esta pestaña cuando definas el módulo.</div>
-            </div>
-            <div class="quick-card">
-              <div class="quick-card-label">Erica</div>
-              <div class="quick-card-value" id="hero-erica-status">💖 Custom love space</div>
-              <div class="quick-card-note" id="hero-erica-note">Load the Erica tab to play the song, shuffle the mini cube, and prep your photos.</div>
+              <div class="quick-card-value" id="hero-docker-status">Pendiente</div>
+              <div class="quick-card-note" id="hero-docker-note">Mantén este espacio listo para la tienda.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Sistema</div>
-              <div class="quick-card-value" id="hero-system-status">Sincronización en espera</div>
-              <div class="quick-card-note" id="hero-system-note">Abre la pestaña “Sistema” para refrescar.</div>
+              <div class="quick-card-value" id="hero-system-status">Sin datos</div>
+              <div class="quick-card-note" id="hero-system-note">Consulta el panel para refrescar información.</div>
             </div>
             <div class="quick-card">
               <div class="quick-card-label">Reto activo</div>
-              <div class="quick-card-value" id="hero-reto-status">Sin plan configurado</div>
-              <div class="quick-card-note" id="hero-reto-note">Calcula la banca y objetivos para empezar.</div>
+              <div class="quick-card-value" id="hero-reto-status">Sin cálculo</div>
+              <div class="quick-card-note" id="hero-reto-note">Genera un plan cuando tengas nuevos datos.</div>
             </div>
           </div>
         </div>
@@ -474,168 +300,15 @@ details[open] summary{color:var(--neon)}
     <!-- PROXIMO PROYECTO -->
     <section id="section-docker" class="panel" style="display:none">
       <h2>Próximo proyecto</h2>
-      <div class="card">
-        <div class="title">🚧 En construcción</div>
-        <div class="value">Aquí irá el siguiente proyecto cuando definas la integración.</div>
-        <div class="quick-card-note">Prepara tus APIs con calma; este espacio ya está listo para adaptarse.</div>
-      </div>
-    </section>
-
-    <!-- ERICA CELEBRATION -->
-    <section id="section-erica" class="panel erica-panel" style="display:none">
-      <div class="erica-intro">
-        <h2>Celebrating Oliver + Erica</h2>
-        <p>
-          This corner stays simple, honest, and 100% yours. Add your real memories, swap in your photos,
-          and keep everything in English so you can show it to Erica whenever you want.
-        </p>
-        <div class="erica-milestones">
-          <div class="erica-milestone">
-            <h3>Highlight slot 1</h3>
-            <p>Replace this line with a real moment you two shared during the first month.</p>
-          </div>
-          <div class="erica-milestone">
-            <h3>Highlight slot 2</h3>
-            <p>Drop a short sentence about something funny, romantic, or unforgettable.</p>
-          </div>
-          <div class="erica-milestone">
-            <h3>Highlight slot 3</h3>
-            <p>Add a promise for the future — keep it true, keep it yours.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="erica-card-grid">
-        <div class="card erica-card">
-          <div class="title">Sweet things to say</div>
-          <ul class="erica-list">
-            <li>You feel like home, even when we’re far apart.</li>
-            <li>I’m proud to choose you again every single day.</li>
-            <li>Your laugh is the part of my playlist that I never skip.</li>
-            <li>Let’s keep building a future where both of us shine.</li>
-          </ul>
-          <div class="erica-note">Want your own? Replace each line with words that sound exactly like you.</div>
-        </div>
-        <div class="card erica-card">
-          <div class="title">Future forever board</div>
-          <p>Use these prompts when you’re ready to add real plans:</p>
-          <ul class="erica-list">
-            <li><strong>Song for us:</strong> write the track that screams Oliver + Erica.</li>
-            <li><strong>Next adventure:</strong> city, beach, or something wild you both love.</li>
-            <li><strong>Comfort thing:</strong> the food, movie, or ritual that always works.</li>
-            <li><strong>Why it matters:</strong> a sentence about why you two are forever.</li>
-          </ul>
-          <div class="erica-quote">“Love is the quiet confidence that we will keep choosing each other.”</div>
-        </div>
-      </div>
-
-      <div class="erica-audio-card">
-        <div class="title">Background song</div>
-        <p>Click play after your first interaction to respect browser autoplay rules.</p>
-        <audio id="erica-audio" controls loop preload="none">
-          <source src="media/back-to-december.mp3" type="audio/mpeg">
-          Your browser does not support the audio element. Upload an MP3 named <code>back-to-december.mp3</code> inside <code>/media</code>.
-        </audio>
-        <div class="erica-audio-actions">
-          <button type="button" id="erica-audio-play">Play song</button>
-          <a href="https://www.youtube.com/watch?v=QUwxKWT6m7U" target="_blank" rel="noopener">Open “Back To December (Taylor’s Version)” on YouTube</a>
-        </div>
-        <details class="erica-note">
-          <summary>Need help adding the song?</summary>
-          <ul class="erica-list" style="margin:10px 0 0">
-            <li>Create a folder named <code>media</code> in the project root.</li>
-            <li>Download or convert the track to MP3 (only for personal use) and save it as <code>back-to-december.mp3</code>.</li>
-            <li>If you prefer streaming, swap the <code>&lt;audio&gt;</code> block with the YouTube embed below:</li>
-          </ul>
-          <pre style="overflow:auto;background:rgba(255,255,255,0.04);padding:12px;border-radius:10px"><code>&lt;iframe src="https://www.youtube.com/embed/QUwxKWT6m7U?autoplay=1&amp;loop=1&amp;playlist=QUwxKWT6m7U" title="Taylor Swift - Back To December" allow="autoplay" allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
-        </details>
-      </div>
-
-      <div class="rubik-card">
-        <div class="title">Mini Rubik vibe</div>
-        <p>Rotate rows and columns until every color returns to the starting layout. Shuffle first, then solve together.</p>
-        <div id="rubik-grid" class="rubik-grid" role="grid" aria-label="3 by 3 color puzzle"></div>
-        <div class="rubik-controls">
-          <div class="rubik-controls-row">
-            <button type="button" data-rotate="row-0-left">Row 1 ◀</button>
-            <button type="button" data-rotate="row-0-right">Row 1 ▶</button>
-          </div>
-          <div class="rubik-controls-row">
-            <button type="button" data-rotate="row-1-left">Row 2 ◀</button>
-            <button type="button" data-rotate="row-1-right">Row 2 ▶</button>
-          </div>
-          <div class="rubik-controls-row">
-            <button type="button" data-rotate="row-2-left">Row 3 ◀</button>
-            <button type="button" data-rotate="row-2-right">Row 3 ▶</button>
-          </div>
-          <div class="rubik-controls-row">
-            <button type="button" data-rotate="col-0-up">Col 1 ▲</button>
-            <button type="button" data-rotate="col-0-down">Col 1 ▼</button>
-          </div>
-          <div class="rubik-controls-row">
-            <button type="button" data-rotate="col-1-up">Col 2 ▲</button>
-            <button type="button" data-rotate="col-1-down">Col 2 ▼</button>
-          </div>
-          <div class="rubik-controls-row">
-            <button type="button" data-rotate="col-2-up">Col 3 ▲</button>
-            <button type="button" data-rotate="col-2-down">Col 3 ▼</button>
-          </div>
-          <button type="button" id="rubik-shuffle" style="justify-self:center;margin-top:6px">Shuffle colors</button>
-        </div>
-        <p id="rubik-message" class="rubik-message" role="status"></p>
-      </div>
-
-      <div class="card erica-door">
-        <div class="title">Memory door</div>
-        <p>Click the door when you’ve added your real couple photos. The overlay shows where to store each file.</p>
-        <button type="button" class="erica-door-button" data-door-open>Open the photo door</button>
-        <p class="erica-note">Photos go inside <code>/assets/erica/</code>. Keep filenames short (e.g. <code>cebu-night-market.jpg</code>).</p>
-      </div>
-
-      <div class="card erica-card">
-        <div class="title">Night Market video</div>
-        <p>Paste your TikTok URL so Erica can relive the moment. Use the official embed once you have the video ID.</p>
-        <a href="https://vm.tiktok.com/ZNdwUK6dU/" target="_blank" rel="noopener" style="color:#80f7f0">View the TikTok placeholder</a>
-        <details class="erica-note" style="margin-top:12px">
-          <summary>How to embed TikTok</summary>
-          <ol class="erica-list" style="margin:10px 0 0">
-            <li>Open the TikTok share link on desktop and copy the full URL after it loads.</li>
-            <li>Replace <code>VIDEO_ID</code> below with the ID from your video link.</li>
-            <li>Insert the snippet inside this card to render the player.</li>
-          </ol>
-          <pre style="overflow:auto;background:rgba(255,255,255,0.04);padding:12px;border-radius:10px"><code>&lt;blockquote class="tiktok-embed" cite="https://www.tiktok.com/@your-user/video/VIDEO_ID" data-video-id="VIDEO_ID" style="max-width:520px;min-width:325px"&gt;
-  &lt;section&gt;&lt;/section&gt;
-&lt;/blockquote&gt;
-&lt;script async src="https://www.tiktok.com/embed.js"&gt;&lt;/script&gt;</code></pre>
-        </details>
-      </div>
-
-      <div class="erica-gallery-overlay" id="erica-gallery" aria-hidden="true">
-        <div class="erica-gallery" role="dialog" aria-modal="true" aria-labelledby="erica-gallery-title">
-          <button type="button" class="erica-gallery-close" data-door-close>Close</button>
-          <h3 id="erica-gallery-title">Your photo placeholders</h3>
-          <p>Upload your pictures to <code>/assets/erica/</code> (create the folder if it doesn’t exist). Suggested filenames:</p>
-          <ul class="erica-list" style="margin:0">
-            <li><code>photo-1.jpg</code> · first month selfie</li>
-            <li><code>photo-2.jpg</code> · Cebu night market snapshot</li>
-            <li><code>photo-3.jpg</code> · anything that feels like your future together</li>
-          </ul>
-          <div class="erica-gallery-grid">
-            <figure>
-              <img src="assets/erica/photo-1.jpg" alt="Replace with your real photo named photo-1.jpg">
-              <figcaption>Photo 1 placeholder — swap the file with your own.</figcaption>
-            </figure>
-            <figure>
-              <img src="assets/erica/photo-2.jpg" alt="Replace with your real photo named photo-2.jpg">
-              <figcaption>Photo 2 placeholder — Cebu night market fits perfectly here.</figcaption>
-            </figure>
-            <figure>
-              <img src="assets/erica/photo-3.jpg" alt="Replace with your real photo named photo-3.jpg">
-              <figcaption>Photo 3 placeholder — dreams, future plans, or any special moment.</figcaption>
-            </figure>
-          </div>
-          <p class="erica-note">Keep image sizes around 1200px on the long side for sharp results without slowing the page.</p>
-        </div>
+      <div class="card project-card">
+        <div class="title">Tienda en línea</div>
+        <div class="value">Planificación en curso</div>
+        <ul class="project-list">
+          <li>Definir catálogo inicial y variantes.</li>
+          <li>Preparar pasarela de pago y logística.</li>
+          <li>Configurar campañas de lanzamiento.</li>
+        </ul>
+        <a class="project-link" href="https://olivercloud.es" target="_blank" rel="noopener">Visitar sitio principal</a>
       </div>
     </section>
 
@@ -730,7 +403,6 @@ const sections={
   home:document.getElementById('section-home'),
   wireguard:document.getElementById('section-wireguard'),
   docker:document.getElementById('section-docker'),
-  erica:document.getElementById('section-erica'),
   reto:document.getElementById('section-reto'),
   system:document.getElementById('section-system')
 };
@@ -740,53 +412,13 @@ const heroEls={
   clockTime:document.getElementById('hero-clock-time'),
   clockDate:document.getElementById('hero-clock-date'),
   clockTz:document.getElementById('hero-clock-tz'),
-  tagline:document.getElementById('hero-tagline'),
-  highlight:document.getElementById('hero-highlight-text'),
   cards:{
     wg:{value:document.getElementById('hero-wg-status'),note:document.getElementById('hero-wg-note')},
     docker:{value:document.getElementById('hero-docker-status'),note:document.getElementById('hero-docker-note')},
-    erica:{value:document.getElementById('hero-erica-status'),note:document.getElementById('hero-erica-note')},
     system:{value:document.getElementById('hero-system-status'),note:document.getElementById('hero-system-note')},
     reto:{value:document.getElementById('hero-reto-status'),note:document.getElementById('hero-reto-note')}
   }
 };
-
-const rubikGame={
-  grid:document.getElementById('rubik-grid'),
-  shuffle:document.getElementById('rubik-shuffle'),
-  message:document.getElementById('rubik-message'),
-  controls:Array.from(document.querySelectorAll('[data-rotate]'))
-};
-const ericaAudio={
-  element:document.getElementById('erica-audio'),
-  toggle:document.getElementById('erica-audio-play')
-};
-const ericaDoor={
-  overlay:document.getElementById('erica-gallery'),
-  openers:Array.from(document.querySelectorAll('[data-door-open]')),
-  closers:Array.from(document.querySelectorAll('[data-door-close]'))
-};
-const ericaState={
-  initialized:false,
-  rubikOriginal:[],
-  rubikCurrent:[],
-  rubikShuffled:false,
-  bodyOverflow:''
-};
-
-const HERO_TAGLINES=[
-  'Control total de redes, apuestas y sistema desde una sola cabina.',
-  'Lanza los chequeos cuando quieras y mantén la cabina en verde.',
-  'Ajusta tu reto mientras vigilas WireGuard y el servidor en paralelo.',
-  'Diseñado para Oliver: rápido, oscuro y con atajos directos.'
-];
-const HERO_HIGHLIGHTS=[
-  'Tip: guarda tu plan del reto y volverá exactamente donde lo dejaste.',
-  'Recuerda revisar los peers activos de WireGuard tras cada despliegue.',
-  'Reserva la pestaña “Próximo proyecto” para tu siguiente idea grande.',
-  '¿Necesitas foco? Cierra el menú con el botón hamburguesa en móviles.',
-  'Añade tu música, fotos y el mini cubo desde la pestaña Erica.'
-];
 
 function updateNavToggle(expanded){
   if(!navToggle) return;
@@ -815,7 +447,6 @@ function switchSection(section){
   if(section==='wireguard') loadWG();
   if(section==='docker') loadDocker();
   if(section==='system') loadSystem();
-  if(section==='erica') ericaEnterSection();
   if(navToggle && navBar){
     navBar.classList.remove('open');
     updateNavToggle(false);
@@ -838,10 +469,7 @@ document.querySelectorAll('[data-jump-section]').forEach(btn=>{
   });
 });
 
-initEricaCelebration();
 startHeroClock();
-startHeroTaglines();
-startHeroHighlights();
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'){
     if(currentSection==='wireguard') loadWG();
@@ -856,188 +484,20 @@ function heroSetCard(key,status,note){
   if(card.value && typeof status==='string') card.value.textContent=status;
   if(card.note && typeof note==='string') card.note.textContent=note;
 }
-function ericaEnterSection(){
-  if(!ericaState.initialized) initEricaCelebration();
-  heroSetCard('erica','💖 Custom love space','Play the song, shuffle the mini cube, or open the photo door when you\'re ready.');
-}
-function initEricaCelebration(){
-  if(ericaState.initialized) return;
-  ericaState.initialized=true;
-  heroSetCard('erica','💖 Ready to personalize','Add your real music, photos, and Rubik mini-game moments.');
-  setupEricaAudio();
-  setupRubikGame();
-  setupEricaDoor();
-}
-function setupEricaAudio(){
-  if(!ericaAudio.element || !ericaAudio.toggle) return;
-  const update=()=>ericaUpdateAudioButton();
-  ericaAudio.toggle.addEventListener('click',()=>{
-    if(ericaAudio.element.paused){
-      ericaAudio.element.play().catch(()=>{
-        heroSetCard('erica','💖 Custom love space','If the song doesn’t start, check the MP3 path or use the YouTube embed.');
-      });
-    }else{
-      ericaAudio.element.pause();
-    }
-  });
-  ericaAudio.element.addEventListener('play',update);
-  ericaAudio.element.addEventListener('pause',update);
-  ericaUpdateAudioButton();
-}
-function ericaUpdateAudioButton(){
-  if(!ericaAudio.toggle || !ericaAudio.element) return;
-  ericaAudio.toggle.textContent = ericaAudio.element.paused ? 'Play song' : 'Pause song';
-}
-function setupRubikGame(){
-  if(!rubikGame.grid) return;
-  if(!ericaState.rubikOriginal.length){
-    ericaState.rubikOriginal=[
-      '#f87171','#fb923c','#facc15',
-      '#34d399','#22d3ee','#818cf8',
-      '#a855f7','#f472b6','#e5e7eb'
-    ];
-    ericaState.rubikCurrent=ericaState.rubikOriginal.slice();
-  }
-  ericaRenderRubik();
-  if(rubikGame.shuffle){
-    rubikGame.shuffle.addEventListener('click',()=>{
-      ericaShuffleRubik();
-      ericaUpdateRubikMessage('Shuffled! Work together to align the colors again.');
-    });
-  }
-  rubikGame.controls.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      ericaRotate(btn.dataset.rotate||'');
-    });
-  });
-  ericaUpdateRubikMessage('Press “Shuffle colors” to start playing.');
-}
-function ericaRenderRubik(){
-  if(!rubikGame.grid) return;
-  const needed=ericaState.rubikCurrent.length;
-  let tiles=Array.from(rubikGame.grid.children);
-  if(tiles.length!==needed){
-    rubikGame.grid.innerHTML='';
-    tiles=ericaState.rubikCurrent.map((_,idx)=>{
-      const tile=document.createElement('div');
-      tile.className='rubik-tile';
-      tile.setAttribute('role','gridcell');
-      tile.setAttribute('aria-label',`Color tile ${idx+1}`);
-      rubikGame.grid.appendChild(tile);
-      return tile;
-    });
-  }
-  tiles.forEach((tile,idx)=>{
-    tile.style.background=ericaState.rubikCurrent[idx]||'#0f172a';
-  });
-}
-function ericaRotate(action,silent=false){
-  if(!action) return;
-  const parts=action.split('-');
-  if(parts[0]==='row'){
-    const row=parseInt(parts[1],10);
-    const dir=parts[2]==='left'?'left':'right';
-    ericaRotateRow(row,dir);
-  }else if(parts[0]==='col'){
-    const col=parseInt(parts[1],10);
-    const dir=parts[2]==='up'?'up':'down';
-    ericaRotateColumn(col,dir);
-  }
-  ericaRenderRubik();
-  if(!silent) ericaEvaluateRubik();
-}
-function ericaRotateRow(row,dir){
-  if(row<0 || row>2) return;
-  const start=row*3;
-  const slice=ericaState.rubikCurrent.slice(start,start+3);
-  if(slice.length<3) return;
-  if(dir==='left'){
-    slice.push(slice.shift());
-  }else{
-    slice.unshift(slice.pop());
-  }
-  for(let i=0;i<3;i++) ericaState.rubikCurrent[start+i]=slice[i];
-}
-function ericaRotateColumn(col,dir){
-  if(col<0 || col>2) return;
-  const indices=[col,col+3,col+6];
-  const values=indices.map(i=>ericaState.rubikCurrent[i]);
-  if(values.includes(undefined)) return;
-  if(dir==='up'){
-    values.push(values.shift());
-  }else{
-    values.unshift(values.pop());
-  }
-  indices.forEach((idx,valIdx)=>{
-    ericaState.rubikCurrent[idx]=values[valIdx];
-  });
-}
-function ericaShuffleRubik(){
-  if(!ericaState.rubikCurrent.length) return;
-  const moves=[
-    'row-0-left','row-0-right','row-1-left','row-1-right','row-2-left','row-2-right',
-    'col-0-up','col-0-down','col-1-up','col-1-down','col-2-up','col-2-down'
-  ];
-  for(let i=0;i<16;i++){
-    const move=moves[Math.floor(Math.random()*moves.length)];
-    ericaRotate(move,true);
-  }
-  ericaState.rubikShuffled=true;
-  ericaRenderRubik();
-  ericaEvaluateRubik();
-}
-function ericaIsRubikSolved(){
-  return ericaState.rubikCurrent.length===ericaState.rubikOriginal.length &&
-    ericaState.rubikCurrent.every((color,idx)=>color===ericaState.rubikOriginal[idx]);
-}
-function ericaEvaluateRubik(){
-  if(ericaIsRubikSolved()){
-    ericaUpdateRubikMessage(ericaState.rubikShuffled ? 'Solved! Screenshot it or shuffle again for another round.' : 'Colors aligned. Press shuffle to mix things up.');
-  }else if(ericaState.rubikShuffled){
-    ericaUpdateRubikMessage('Keep going! Align each row and column back to the original colors.');
-  }else{
-    ericaUpdateRubikMessage('Press “Shuffle colors” to mix the tiles.');
-  }
-}
-function ericaUpdateRubikMessage(message){
-  if(rubikGame.message) rubikGame.message.textContent=message||'';
-}
-function setupEricaDoor(){
-  if(!ericaDoor.overlay) return;
-  ericaDoor.openers.forEach(btn=>btn.addEventListener('click',()=>ericaToggleGallery(true)));
-  ericaDoor.closers.forEach(btn=>btn.addEventListener('click',()=>ericaToggleGallery(false)));
-  ericaDoor.overlay.addEventListener('click',ev=>{
-    if(ev.target===ericaDoor.overlay) ericaToggleGallery(false);
-  });
-  document.addEventListener('keydown',ev=>{
-    if(ev.key==='Escape' && ericaDoor.overlay.classList.contains('show')){
-      ericaToggleGallery(false);
-    }
-  });
-}
-function ericaToggleGallery(show){
-  if(!ericaDoor.overlay) return;
-  ericaDoor.overlay.classList.toggle('show',Boolean(show));
-  ericaDoor.overlay.setAttribute('aria-hidden',show?'false':'true');
-  if(show){
-    ericaState.bodyOverflow=document.body.style.overflow;
-    document.body.style.overflow='hidden';
-    const close=ericaDoor.closers[0];
-    if(close) setTimeout(()=>close.focus(),120);
-  }else{
-    document.body.style.overflow=ericaState.bodyOverflow||'';
-  }
-}
 function heroNowLabel(){
   return new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'}).format(new Date());
 }
 function startHeroClock(){
   if(!heroEls.clockTime || !heroEls.clockDate) return;
-  try{
-    const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Horario local';
-    if(heroEls.clockTz) heroEls.clockTz.textContent=tz;
-  }catch{
-    if(heroEls.clockTz) heroEls.clockTz.textContent='Horario local';
+  if(heroEls.clockTz){
+    const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local';
+    const offsetMinutes=new Date().getTimezoneOffset();
+    const offsetTotal=-offsetMinutes;
+    const sign=offsetTotal>=0?'+':'-';
+    const absTotal=Math.abs(offsetTotal);
+    const hours=String(Math.trunc(absTotal/60)).padStart(2,'0');
+    const minutes=String(absTotal%60).padStart(2,'0');
+    heroEls.clockTz.textContent=`${tz} · UTC${sign}${hours}:${minutes}`;
   }
   const fmtTime=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const fmtDate=new Intl.DateTimeFormat('es-ES',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
@@ -1049,26 +509,6 @@ function startHeroClock(){
   tick();
   setInterval(tick,1000);
 }
-function startHeroTaglines(){
-  if(!heroEls.tagline || !HERO_TAGLINES.length) return;
-  let idx=Math.floor(Math.random()*HERO_TAGLINES.length);
-  const rotate=()=>{
-    heroEls.tagline.textContent=HERO_TAGLINES[idx];
-    idx=(idx+1)%HERO_TAGLINES.length;
-  };
-  rotate();
-  setInterval(rotate,8000);
-}
-function startHeroHighlights(){
-  if(!heroEls.highlight || !HERO_HIGHLIGHTS.length) return;
-  let idx=Math.floor(Math.random()*HERO_HIGHLIGHTS.length);
-  const rotate=()=>{
-    heroEls.highlight.textContent=HERO_HIGHLIGHTS[idx];
-    idx=(idx+1)%HERO_HIGHLIGHTS.length;
-  };
-  rotate();
-  setInterval(rotate,9000);
-}
 
 /* ====== WireGuard ====== */
 async function loadWG(){
@@ -1078,14 +518,14 @@ async function loadWG(){
   s.textContent='Estado: comprobando...';
   sm.textContent='Cargando...';
   peersBox.innerHTML='';
-  heroSetCard('wg','Comprobando…','Consultando estado en vivo');
+  heroSetCard('wg','Comprobando…','Cargando estado actual.');
   try{
     const res=await fetch('https://api.olivercloud.es/api/wg/status',{cache:'no-store'});
     const d=await res.json();
     if(!d || d.status!=='ok' || !d.running){
       s.textContent='🔴 Inactivo';
       sm.textContent=d?.message||'WireGuard no disponible';
-      heroSetCard('wg','🔴 Inactivo', d?.message ? d.message : 'WireGuard no disponible');
+      heroSetCard('wg','🔴 Inactivo', d?.message ? d.message : 'No hay túneles activos.');
       return;
     }
     s.innerHTML='<span style="color:#22c55e">🟢 Activo</span>';
@@ -1108,20 +548,20 @@ async function loadWG(){
     }
   }catch(e){
     s.textContent='⚠️ Error'; sm.textContent='No se pudo conectar con la API';
-    heroSetCard('wg','⚠️ Error','No se pudo conectar con la API');
+    heroSetCard('wg','⚠️ Error','Reintenta en unos segundos.');
   }
 }
 
 /* ====== Docker ====== */
 function loadDocker(){
-  heroSetCard('docker','🚧 En construcción','Personaliza este módulo cuando esté listo.');
+  heroSetCard('docker','En preparación','Revisa la hoja de ruta en el módulo.');
 }
 
 /* ====== Sistema ====== */
 async function loadSystem(){
   const E=(id)=>document.getElementById(id);
   const set=(id,v)=>E(id).textContent=v;
-  heroSetCard('system','Sincronizando…','Obteniendo estado del sistema');
+  heroSetCard('system','Actualizando…','Consultando el estado del servidor.');
   try{
     const res=await fetch('https://api.olivercloud.es/api/system/status',{cache:'no-store'});
     const d=await res.json();
@@ -1156,7 +596,7 @@ async function loadSystem(){
     set('s-hostname','Error'); set('s-os','Error'); set('s-uptime','Error');
     set('s-cpu','N/A'); set('s-ram','N/A'); set('s-disk','N/A'); set('s-temp','N/A'); set('s-docker','N/A'); set('s-ip','N/A');
     E('s-docker-tip').textContent='No se pudo obtener info';
-    heroSetCard('system','⚠️ Error','Reintenta en unos segundos');
+    heroSetCard('system','⚠️ Error','Revisa la conexión y vuelve a intentarlo.');
   }
 }
 
